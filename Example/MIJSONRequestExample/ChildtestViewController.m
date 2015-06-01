@@ -36,7 +36,10 @@
 
 - (IBAction)startTestRequestAndPop:(id)sender {
     
-    MIJSONRequest *request = [self.requestManager startRequestWithJSONDictionary:@{@"action" : @"validate", @"signup_code" : @"12334"} startBlock:^(MIJSONRequest *request, BOOL started){
+    
+    __block ChildtestViewController *blockSelf = self;
+    
+    MIJSONRequest *request = [self.requestManager startRequestWithJSONDictionary:@{@"action" : @"validate", @"signup_code" : @"mf2100"} startBlock:^(MIJSONRequest *request, BOOL started){
     
         NSLog(@"started: %i", started);
         
@@ -47,10 +50,15 @@
     }completionBlock:^(MIJSONRequest *request, enum MIJSONRequestResult result, NSDictionary *respone, NSError *error){
     
         NSLog(@"finished: %lu, response: %@  Error: %@", (unsigned long)result, respone, error);
+        [blockSelf testDummyCompeteMethod:respone];
         
     } client:self];
    
-    [self.navigationController popViewControllerAnimated:YES];
+    [self.navigationController popViewControllerAnimated:NO];
     
+}
+-(void)testDummyCompeteMethod:(NSDictionary *)response{
+
+    NSLog(@"testDummyCompeteMethod....");
 }
 @end
