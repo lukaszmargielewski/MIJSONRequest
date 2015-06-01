@@ -255,7 +255,6 @@
 }
 -(void)cancelAllRequestsForClient:(id)client{
 
-    return;
     NSPredicate *predicate = [NSPredicate predicateWithFormat:@"client = %@", client];
     NSSet *toCancel = [_requestsInProgress filteredSetUsingPredicate:predicate];
     

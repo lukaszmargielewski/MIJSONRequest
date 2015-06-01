@@ -58,7 +58,7 @@
     
     
     NSError *error = nil;
-    NSData *data = [NSJSONSerialization dataWithJSONObject:_sessionDictionary options:NULL error:&error];
+    NSData *data = [NSJSONSerialization dataWithJSONObject:_sessionDictionary options:0 error:&error];
     
     if (data) {
         NSString *jsonString = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
@@ -72,7 +72,7 @@
 
     
 }
--(void)destroyLoginSession{
+-(void)destroySession{
 
     _sessionDictionary = nil;
     [self.keychainSession resetKeychainItem];
@@ -80,7 +80,7 @@
 -(NSDictionary *)tryToRecreateSession{
 
    NSString *jsonString = [self.keychainSession objectForKey:(__bridge id)(kSecValueData)];
-    NSDictionary *dict = [NSJSONSerialization JSONObjectWithData:[jsonString dataUsingEncoding:NSUTF8StringEncoding] options:NULL error:nil];
+    NSDictionary *dict = [NSJSONSerialization JSONObjectWithData:[jsonString dataUsingEncoding:NSUTF8StringEncoding] options:0 error:nil];
     
     return dict;
 }
