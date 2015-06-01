@@ -10,6 +10,8 @@
 		A14EDBDE1B1C37FD00CF5C9D /* MIJSONRequestAuthenticateExample.m in Sources */ = {isa = PBXBuildFile; fileRef = A14EDBDD1B1C37FD00CF5C9D /* MIJSONRequestAuthenticateExample.m */; };
 		A14EDBE11B1C3FAD00CF5C9D /* NSData+Base64.m in Sources */ = {isa = PBXBuildFile; fileRef = A14EDBE01B1C3FAD00CF5C9D /* NSData+Base64.m */; };
 		A14EDBE41B1C686C00CF5C9D /* ChildtestViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A14EDBE31B1C686C00CF5C9D /* ChildtestViewController.m */; };
+		A14EDBE71B1C830500CF5C9D /* MIJSONRequestSecureSession.m in Sources */ = {isa = PBXBuildFile; fileRef = A14EDBE61B1C830500CF5C9D /* MIJSONRequestSecureSession.m */; };
+		A14EDBEA1B1C869800CF5C9D /* KeychainItemWrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = A14EDBE91B1C869800CF5C9D /* KeychainItemWrapper.m */; };
 		A173863C1B18A04D00750B53 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = A173863B1B18A04D00750B53 /* main.m */; };
 		A173863F1B18A04D00750B53 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = A173863E1B18A04D00750B53 /* AppDelegate.m */; };
 		A17386421B18A04D00750B53 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A17386411B18A04D00750B53 /* ViewController.m */; };
@@ -39,6 +41,10 @@
 		A14EDBE01B1C3FAD00CF5C9D /* NSData+Base64.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSData+Base64.m"; sourceTree = "<group>"; };
 		A14EDBE21B1C686C00CF5C9D /* ChildtestViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChildtestViewController.h; sourceTree = "<group>"; };
 		A14EDBE31B1C686C00CF5C9D /* ChildtestViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChildtestViewController.m; sourceTree = "<group>"; };
+		A14EDBE51B1C830500CF5C9D /* MIJSONRequestSecureSession.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MIJSONRequestSecureSession.h; sourceTree = "<group>"; };
+		A14EDBE61B1C830500CF5C9D /* MIJSONRequestSecureSession.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MIJSONRequestSecureSession.m; sourceTree = "<group>"; };
+		A14EDBE81B1C869800CF5C9D /* KeychainItemWrapper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KeychainItemWrapper.h; sourceTree = "<group>"; };
+		A14EDBE91B1C869800CF5C9D /* KeychainItemWrapper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KeychainItemWrapper.m; sourceTree = "<group>"; };
 		A17386361B18A04D00750B53 /* MIJSONRequestExample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MIJSONRequestExample.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A173863A1B18A04D00750B53 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A173863B1B18A04D00750B53 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -158,6 +164,10 @@
 			children = (
 				A17386631B18A15300750B53 /* Reachability.h */,
 				A17386641B18A15300750B53 /* Reachability.m */,
+				A14EDBE81B1C869800CF5C9D /* KeychainItemWrapper.h */,
+				A14EDBE91B1C869800CF5C9D /* KeychainItemWrapper.m */,
+				A14EDBE51B1C830500CF5C9D /* MIJSONRequestSecureSession.h */,
+				A14EDBE61B1C830500CF5C9D /* MIJSONRequestSecureSession.m */,
 				A17386611B18A15300750B53 /* MIJSONRequest.h */,
 				A17386621B18A15300750B53 /* MIJSONRequest.m */,
 				A17386651B18A15300750B53 /* MIJSONRequestManager.h */,
@@ -266,11 +276,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A14EDBE71B1C830500CF5C9D /* MIJSONRequestSecureSession.m in Sources */,
 				A17386421B18A04D00750B53 /* ViewController.m in Sources */,
 				A17386671B18A15300750B53 /* MIJSONRequest.m in Sources */,
 				A14EDBDE1B1C37FD00CF5C9D /* MIJSONRequestAuthenticateExample.m in Sources */,
 				A173863F1B18A04D00750B53 /* AppDelegate.m in Sources */,
 				A17386691B18A15300750B53 /* MIJSONRequestManager.m in Sources */,
+				A14EDBEA1B1C869800CF5C9D /* KeychainItemWrapper.m in Sources */,
 				A14EDBE11B1C3FAD00CF5C9D /* NSData+Base64.m in Sources */,
 				A173863C1B18A04D00750B53 /* main.m in Sources */,
 				A14EDBE41B1C686C00CF5C9D /* ChildtestViewController.m in Sources */,

@@ -7,7 +7,6 @@
 //
 
 #import <Foundation/Foundation.h>
-
 #import "MIJSONRequest.h"
 #import "Reachability.h"
 
@@ -39,7 +38,6 @@
 @property (nonatomic, readonly) BOOL connected, connected_before;
 @property (nonatomic, readonly) NetworkStatus hostStatus;
 @property (nonatomic, assign) id<MIJSONRequestAuthenticate>authDelegate;
-
 
 #pragma mark - Init:
 
