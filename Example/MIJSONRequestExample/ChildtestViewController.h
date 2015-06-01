@@ -11,6 +11,7 @@
 
 @interface ChildtestViewController : UIViewController
 - (IBAction)startTestRequestAndPop:(id)sender;
+- (IBAction)startTestRequestWithoutPup:(id)sender;
 
 @property (nonatomic, assign) MIJSONRequestManager *requestManager;
 

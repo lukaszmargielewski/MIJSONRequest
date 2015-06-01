@@ -195,6 +195,14 @@
 	_downloading = NO;
     
 	[UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
+    
+    if (_completionBlock) {
+        __block MIJSONRequest *rrr = self;
+            
+        _completionBlock(rrr, MIJSONRequestResultCancelled, nil, nil);
+        _completionBlock = nil;
+    }
+    
 }
 
 #pragma mark - Download support (NSURLConnectionDelegate):
@@ -308,6 +316,7 @@
         dispatch_async(dispatch_get_main_queue(), ^{
         
             _completionBlock(rrr, MIJSONRequestResultFailed, nil, error);
+            _completionBlock = nil;
         });
         
     }
@@ -360,10 +369,10 @@
                 // Inform delegate that response has been received
             
             if (_completionBlock) {
-                __block MIJSONRequest *rrr = self;
                 
-                    
-                    _completionBlock(rrr, MIJSONRequestResultSuccess, _jsonResponse, jsonError);
+                __block MIJSONRequest *rrr = self;
+                _completionBlock(rrr, MIJSONRequestResultSuccess, _jsonResponse, jsonError);
+                _completionBlock = nil;
             }
             
             

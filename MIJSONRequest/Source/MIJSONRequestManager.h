@@ -76,6 +76,7 @@
 -(void)cancelRequest:(MIJSONRequest *)request;
 -(void)cancelRequestsWithName:(NSString *)name;
 -(void)cancelAllRequests;
+-(void)cancelAllRequestsForClient:(id)client;
 
 
 @end

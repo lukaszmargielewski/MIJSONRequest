@@ -78,10 +78,21 @@
                                     <action selector="startTestRequestAndPop:" destination="Vqt-5y-M1a" eventType="touchUpInside" id="lJx-7W-dZe"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vzq-02-pqc">
+                                <rect key="frame" x="36" y="169" width="149" height="30"/>
+                                <state key="normal" title="Start test without pop">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="startTestRequestWithoutPup:" destination="Vqt-5y-M1a" eventType="touchUpInside" id="sp1-o5-j7y"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="i2P-d3-asV" firstAttribute="top" secondItem="nEa-Yw-0SW" secondAttribute="bottom" constant="20" id="3vE-Hv-GXq"/>
+                            <constraint firstItem="vzq-02-pqc" firstAttribute="top" secondItem="i2P-d3-asV" secondAttribute="bottom" constant="8" id="d08-ES-EHt"/>
+                            <constraint firstItem="i2P-d3-asV" firstAttribute="leading" secondItem="vzq-02-pqc" secondAttribute="leading" id="t9k-Qn-TTG"/>
                             <constraint firstItem="i2P-d3-asV" firstAttribute="leading" secondItem="RM6-rZ-8Vm" secondAttribute="leadingMargin" constant="15" id="zfK-fa-lBk"/>
                         </constraints>
                     </view>

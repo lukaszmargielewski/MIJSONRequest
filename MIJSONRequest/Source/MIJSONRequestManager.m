@@ -219,8 +219,11 @@
             break;
         }
     }
-
-    [_requestsInProgress removeObject:toCancel];
+    
+    if (toCancel) {
+        
+        [_requestsInProgress removeObject:toCancel];
+    }
     
     
 }
@@ -250,7 +253,20 @@
 	
     [_requestsInProgress removeAllObjects];
 }
+-(void)cancelAllRequestsForClient:(id)client{
 
+    return;
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"client = %@", client];
+    NSSet *toCancel = [_requestsInProgress filteredSetUsingPredicate:predicate];
+    
+    for (MIJSONRequestManagerRequestObject *ro in toCancel) {
+        
+        MIJSONRequest *request = ro.request;
+        [request cancel];
+        [_requestsInProgress removeObject:ro];
+    }
+    
+}
 #pragma mark - Action Request delegate:
 
 -(void)action:(MIJSONRequest *)request sentRequest:(NSDictionary *)requestDictionary toUrl:(NSURL *)url{
@@ -281,7 +297,11 @@
         }
     }
     
-    [_requestsInProgress removeObject:toRemove];
+    if (toRemove) {
+    
+        [_requestsInProgress removeObject:toRemove];
+    }
+    
 }
 
 #pragma mark - Reachability:

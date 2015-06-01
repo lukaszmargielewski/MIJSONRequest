@@ -12,8 +12,22 @@
 
 @end
 
-@implementation ChildtestViewController
+@implementation ChildtestViewController{
 
+    MIJSONRequest *request;
+}
+
+- (void)dealloc{
+
+    [self.requestManager cancelRequest:request];
+}
+///*
+-(void)viewWillDisappear:(BOOL)animated{
+
+    [self.requestManager cancelAllRequestsForClient:self];
+    [self.requestManager cancelRequest:request];
+}
+// */
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
@@ -37,24 +51,37 @@
 - (IBAction)startTestRequestAndPop:(id)sender {
     
     
+    [self testRequestWithPop:YES];
+    
+}
+
+- (IBAction)startTestRequestWithoutPup:(id)sender {
+    [self testRequestWithPop:NO];
+}
+
+- (void)testRequestWithPop:(BOOL)pop{
+
     __block ChildtestViewController *blockSelf = self;
     
-    MIJSONRequest *request = [self.requestManager startRequestWithJSONDictionary:@{@"action" : @"validate", @"signup_code" : @"mf2100"} startBlock:^(MIJSONRequest *request, BOOL started){
-    
+    request = [self.requestManager startRequestWithJSONDictionary:@{@"action" : @"validate", @"signup_code" : @"mf2100"} startBlock:^(MIJSONRequest *request, BOOL started){
+        
         NSLog(@"started: %i", started);
         
     } progressBlock:^(MIJSONRequest *requet, float progress) {
-    
+        
         NSLog(@"progress: %f", progress);
         
     }completionBlock:^(MIJSONRequest *request, enum MIJSONRequestResult result, NSDictionary *respone, NSError *error){
-    
+        
         NSLog(@"finished: %lu, response: %@  Error: %@", (unsigned long)result, respone, error);
         [blockSelf testDummyCompeteMethod:respone];
         
     } client:self];
-   
-    [self.navigationController popViewControllerAnimated:NO];
+    
+    if (pop) {
+    
+        [self.navigationController popViewControllerAnimated:NO];
+    }
     
 }
 -(void)testDummyCompeteMethod:(NSDictionary *)response{
