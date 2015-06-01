@@ -1,0 +1,486 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		A14EDBDE1B1C37FD00CF5C9D /* MIJSONRequestAuthenticateExample.m in Sources */ = {isa = PBXBuildFile; fileRef = A14EDBDD1B1C37FD00CF5C9D /* MIJSONRequestAuthenticateExample.m */; };
+		A14EDBE11B1C3FAD00CF5C9D /* NSData+Base64.m in Sources */ = {isa = PBXBuildFile; fileRef = A14EDBE01B1C3FAD00CF5C9D /* NSData+Base64.m */; };
+		A14EDBE41B1C686C00CF5C9D /* ChildtestViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A14EDBE31B1C686C00CF5C9D /* ChildtestViewController.m */; };
+		A173863C1B18A04D00750B53 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = A173863B1B18A04D00750B53 /* main.m */; };
+		A173863F1B18A04D00750B53 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = A173863E1B18A04D00750B53 /* AppDelegate.m */; };
+		A17386421B18A04D00750B53 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A17386411B18A04D00750B53 /* ViewController.m */; };
+		A17386451B18A04D00750B53 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A17386431B18A04D00750B53 /* Main.storyboard */; };
+		A17386471B18A04D00750B53 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A17386461B18A04D00750B53 /* Images.xcassets */; };
+		A173864A1B18A04D00750B53 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = A17386481B18A04D00750B53 /* LaunchScreen.xib */; };
+		A17386561B18A04D00750B53 /* MIJSONRequestExampleTests.m in Sources */ = {isa = PBXBuildFile; fileRef = A17386551B18A04D00750B53 /* MIJSONRequestExampleTests.m */; };
+		A17386671B18A15300750B53 /* MIJSONRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = A17386621B18A15300750B53 /* MIJSONRequest.m */; };
+		A17386681B18A15300750B53 /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = A17386641B18A15300750B53 /* Reachability.m */; };
+		A17386691B18A15300750B53 /* MIJSONRequestManager.m in Sources */ = {isa = PBXBuildFile; fileRef = A17386661B18A15300750B53 /* MIJSONRequestManager.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		A17386501B18A04D00750B53 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = A173862E1B18A04D00750B53 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = A17386351B18A04D00750B53;
+			remoteInfo = MIJSONRequestExample;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		A14EDBDC1B1C37FD00CF5C9D /* MIJSONRequestAuthenticateExample.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MIJSONRequestAuthenticateExample.h; sourceTree = "<group>"; };
+		A14EDBDD1B1C37FD00CF5C9D /* MIJSONRequestAuthenticateExample.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MIJSONRequestAuthenticateExample.m; sourceTree = "<group>"; };
+		A14EDBDF1B1C3FAD00CF5C9D /* NSData+Base64.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSData+Base64.h"; sourceTree = "<group>"; };
+		A14EDBE01B1C3FAD00CF5C9D /* NSData+Base64.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSData+Base64.m"; sourceTree = "<group>"; };
+		A14EDBE21B1C686C00CF5C9D /* ChildtestViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChildtestViewController.h; sourceTree = "<group>"; };
+		A14EDBE31B1C686C00CF5C9D /* ChildtestViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChildtestViewController.m; sourceTree = "<group>"; };
+		A17386361B18A04D00750B53 /* MIJSONRequestExample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MIJSONRequestExample.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		A173863A1B18A04D00750B53 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		A173863B1B18A04D00750B53 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		A173863D1B18A04D00750B53 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		A173863E1B18A04D00750B53 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		A17386401B18A04D00750B53 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
+		A17386411B18A04D00750B53 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+		A17386441B18A04D00750B53 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		A17386461B18A04D00750B53 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		A17386491B18A04D00750B53 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
+		A173864F1B18A04D00750B53 /* MIJSONRequestExampleTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MIJSONRequestExampleTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		A17386541B18A04D00750B53 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		A17386551B18A04D00750B53 /* MIJSONRequestExampleTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MIJSONRequestExampleTests.m; sourceTree = "<group>"; };
+		A17386611B18A15300750B53 /* MIJSONRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MIJSONRequest.h; sourceTree = "<group>"; };
+		A17386621B18A15300750B53 /* MIJSONRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MIJSONRequest.m; sourceTree = "<group>"; };
+		A17386631B18A15300750B53 /* Reachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Reachability.h; sourceTree = "<group>"; };
+		A17386641B18A15300750B53 /* Reachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Reachability.m; sourceTree = "<group>"; };
+		A17386651B18A15300750B53 /* MIJSONRequestManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MIJSONRequestManager.h; sourceTree = "<group>"; };
+		A17386661B18A15300750B53 /* MIJSONRequestManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MIJSONRequestManager.m; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		A17386331B18A04D00750B53 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A173864C1B18A04D00750B53 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		A173862D1B18A04D00750B53 = {
+			isa = PBXGroup;
+			children = (
+				A173865F1B18A15300750B53 /* MIJSONRequest */,
+				A17386381B18A04D00750B53 /* MIJSONRequestExample */,
+				A17386521B18A04D00750B53 /* MIJSONRequestExampleTests */,
+				A17386371B18A04D00750B53 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		A17386371B18A04D00750B53 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				A17386361B18A04D00750B53 /* MIJSONRequestExample.app */,
+				A173864F1B18A04D00750B53 /* MIJSONRequestExampleTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		A17386381B18A04D00750B53 /* MIJSONRequestExample */ = {
+			isa = PBXGroup;
+			children = (
+				A14EDBDF1B1C3FAD00CF5C9D /* NSData+Base64.h */,
+				A14EDBE01B1C3FAD00CF5C9D /* NSData+Base64.m */,
+				A173863D1B18A04D00750B53 /* AppDelegate.h */,
+				A173863E1B18A04D00750B53 /* AppDelegate.m */,
+				A17386401B18A04D00750B53 /* ViewController.h */,
+				A17386411B18A04D00750B53 /* ViewController.m */,
+				A14EDBE21B1C686C00CF5C9D /* ChildtestViewController.h */,
+				A14EDBE31B1C686C00CF5C9D /* ChildtestViewController.m */,
+				A17386431B18A04D00750B53 /* Main.storyboard */,
+				A17386461B18A04D00750B53 /* Images.xcassets */,
+				A17386481B18A04D00750B53 /* LaunchScreen.xib */,
+				A17386391B18A04D00750B53 /* Supporting Files */,
+				A14EDBDC1B1C37FD00CF5C9D /* MIJSONRequestAuthenticateExample.h */,
+				A14EDBDD1B1C37FD00CF5C9D /* MIJSONRequestAuthenticateExample.m */,
+			);
+			path = MIJSONRequestExample;
+			sourceTree = "<group>";
+		};
+		A17386391B18A04D00750B53 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				A173863A1B18A04D00750B53 /* Info.plist */,
+				A173863B1B18A04D00750B53 /* main.m */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		A17386521B18A04D00750B53 /* MIJSONRequestExampleTests */ = {
+			isa = PBXGroup;
+			children = (
+				A17386551B18A04D00750B53 /* MIJSONRequestExampleTests.m */,
+				A17386531B18A04D00750B53 /* Supporting Files */,
+			);
+			path = MIJSONRequestExampleTests;
+			sourceTree = "<group>";
+		};
+		A17386531B18A04D00750B53 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				A17386541B18A04D00750B53 /* Info.plist */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		A173865F1B18A15300750B53 /* MIJSONRequest */ = {
+			isa = PBXGroup;
+			children = (
+				A17386601B18A15300750B53 /* Source */,
+			);
+			name = MIJSONRequest;
+			path = ../MIJSONRequest;
+			sourceTree = "<group>";
+		};
+		A17386601B18A15300750B53 /* Source */ = {
+			isa = PBXGroup;
+			children = (
+				A17386631B18A15300750B53 /* Reachability.h */,
+				A17386641B18A15300750B53 /* Reachability.m */,
+				A17386611B18A15300750B53 /* MIJSONRequest.h */,
+				A17386621B18A15300750B53 /* MIJSONRequest.m */,
+				A17386651B18A15300750B53 /* MIJSONRequestManager.h */,
+				A17386661B18A15300750B53 /* MIJSONRequestManager.m */,
+			);
+			path = Source;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		A17386351B18A04D00750B53 /* MIJSONRequestExample */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = A17386591B18A04D00750B53 /* Build configuration list for PBXNativeTarget "MIJSONRequestExample" */;
+			buildPhases = (
+				A17386321B18A04D00750B53 /* Sources */,
+				A17386331B18A04D00750B53 /* Frameworks */,
+				A17386341B18A04D00750B53 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = MIJSONRequestExample;
+			productName = MIJSONRequestExample;
+			productReference = A17386361B18A04D00750B53 /* MIJSONRequestExample.app */;
+			productType = "com.apple.product-type.application";
+		};
+		A173864E1B18A04D00750B53 /* MIJSONRequestExampleTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = A173865C1B18A04D00750B53 /* Build configuration list for PBXNativeTarget "MIJSONRequestExampleTests" */;
+			buildPhases = (
+				A173864B1B18A04D00750B53 /* Sources */,
+				A173864C1B18A04D00750B53 /* Frameworks */,
+				A173864D1B18A04D00750B53 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				A17386511B18A04D00750B53 /* PBXTargetDependency */,
+			);
+			name = MIJSONRequestExampleTests;
+			productName = MIJSONRequestExampleTests;
+			productReference = A173864F1B18A04D00750B53 /* MIJSONRequestExampleTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		A173862E1B18A04D00750B53 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0630;
+				ORGANIZATIONNAME = "Lukasz Margielewski";
+				TargetAttributes = {
+					A17386351B18A04D00750B53 = {
+						CreatedOnToolsVersion = 6.3.1;
+					};
+					A173864E1B18A04D00750B53 = {
+						CreatedOnToolsVersion = 6.3.1;
+						TestTargetID = A17386351B18A04D00750B53;
+					};
+				};
+			};
+			buildConfigurationList = A17386311B18A04D00750B53 /* Build configuration list for PBXProject "MIJSONRequestExample" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = A173862D1B18A04D00750B53;
+			productRefGroup = A17386371B18A04D00750B53 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				A17386351B18A04D00750B53 /* MIJSONRequestExample */,
+				A173864E1B18A04D00750B53 /* MIJSONRequestExampleTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		A17386341B18A04D00750B53 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A17386451B18A04D00750B53 /* Main.storyboard in Resources */,
+				A173864A1B18A04D00750B53 /* LaunchScreen.xib in Resources */,
+				A17386471B18A04D00750B53 /* Images.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A173864D1B18A04D00750B53 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		A17386321B18A04D00750B53 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A17386421B18A04D00750B53 /* ViewController.m in Sources */,
+				A17386671B18A15300750B53 /* MIJSONRequest.m in Sources */,
+				A14EDBDE1B1C37FD00CF5C9D /* MIJSONRequestAuthenticateExample.m in Sources */,
+				A173863F1B18A04D00750B53 /* AppDelegate.m in Sources */,
+				A17386691B18A15300750B53 /* MIJSONRequestManager.m in Sources */,
+				A14EDBE11B1C3FAD00CF5C9D /* NSData+Base64.m in Sources */,
+				A173863C1B18A04D00750B53 /* main.m in Sources */,
+				A14EDBE41B1C686C00CF5C9D /* ChildtestViewController.m in Sources */,
+				A17386681B18A15300750B53 /* Reachability.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A173864B1B18A04D00750B53 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A17386561B18A04D00750B53 /* MIJSONRequestExampleTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		A17386511B18A04D00750B53 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = A17386351B18A04D00750B53 /* MIJSONRequestExample */;
+			targetProxy = A17386501B18A04D00750B53 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		A17386431B18A04D00750B53 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				A17386441B18A04D00750B53 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		A17386481B18A04D00750B53 /* LaunchScreen.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				A17386491B18A04D00750B53 /* Base */,
+			);
+			name = LaunchScreen.xib;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		A17386571B18A04D00750B53 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		A17386581B18A04D00750B53 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		A173865A1B18A04D00750B53 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				INFOPLIST_FILE = MIJSONRequestExample/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		A173865B1B18A04D00750B53 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				INFOPLIST_FILE = MIJSONRequestExample/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+		A173865D1B18A04D00750B53 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+				);
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = MIJSONRequestExampleTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/MIJSONRequestExample.app/MIJSONRequestExample";
+			};
+			name = Debug;
+		};
+		A173865E1B18A04D00750B53 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = MIJSONRequestExampleTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/MIJSONRequestExample.app/MIJSONRequestExample";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		A17386311B18A04D00750B53 /* Build configuration list for PBXProject "MIJSONRequestExample" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A17386571B18A04D00750B53 /* Debug */,
+				A17386581B18A04D00750B53 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		A17386591B18A04D00750B53 /* Build configuration list for PBXNativeTarget "MIJSONRequestExample" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A173865A1B18A04D00750B53 /* Debug */,
+				A173865B1B18A04D00750B53 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		A173865C1B18A04D00750B53 /* Build configuration list for PBXNativeTarget "MIJSONRequestExampleTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A173865D1B18A04D00750B53 /* Debug */,
+				A173865E1B18A04D00750B53 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = A173862E1B18A04D00750B53 /* Project object */;
+}
