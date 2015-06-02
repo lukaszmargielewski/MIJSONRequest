@@ -14,13 +14,18 @@ NSString *kMIJSONRequestManagerHttpMethodGET = @"GET";
 NSString *kMIJSONRequestManagerHttpMethodPOST = @"POST";
 
 @interface MIJSONRequestManager()
-
+@property (nonatomic, strong) NSMutableSet *activityObservers;
 @end
 
 @implementation MIJSONRequestManager{
     
     NSMutableSet *_requestsInProgress;
-
+    
+    unsigned long long _totalBytesToDownload;
+    unsigned long long _totalDownloadedBytes;
+    float              _totalProgress;
+    
+    NSUInteger iBefore;
 }
 @synthesize connected = connected, connected_before;
 @synthesize hostStatus;
@@ -276,6 +281,20 @@ MIJSONRequestManagerLoginSessionType _sessionType;
     
     [jsonRequest start];
     
+    
+    NSUInteger iBefore = _requestsInProgress.count;
+    [_requestsInProgress addObject:ro];
+    
+    [jsonRequest start];
+    
+    if (iBefore == 0) {
+        dispatch_async(dispatch_get_main_queue(), ^{
+        
+            [self resumed];
+        });
+        
+    }
+    
     return jsonRequest;
 }
 
@@ -310,12 +329,15 @@ MIJSONRequestManagerLoginSessionType _sessionType;
         }
     }
     
+    iBefore = _requestsInProgress.count;
+    
     if (toCancel) {
         
         [_requestsInProgress removeObject:toCancel];
     }
-    
-    
+
+    [self checkRequestsCount];
+
 }
 -(void)cancelRequestsWithName:(NSString *)name{
 
@@ -324,6 +346,8 @@ MIJSONRequestManagerLoginSessionType _sessionType;
     NSPredicate *predicate = [NSPredicate predicateWithFormat:@"name = %@", name];
     NSSet *toCancel = [_requestsInProgress filteredSetUsingPredicate:predicate];
     
+    iBefore = _requestsInProgress.count;
+    
     for (MIJSONRequestManagerRequestObject *ro in toCancel) {
     
         MIJSONRequest *request = ro.request;
@@ -331,6 +355,9 @@ MIJSONRequestManagerLoginSessionType _sessionType;
         [_requestsInProgress removeObject:ro];
     }
     
+    
+    [self checkRequestsCount];
+
     
 }
 -(void)cancelAllRequests{
@@ -340,13 +367,17 @@ MIJSONRequestManagerLoginSessionType _sessionType;
         MIJSONRequest *request = ro.request;
         [request cancel];
 	}
-	
+    
+    iBefore = _requestsInProgress.count;
     [_requestsInProgress removeAllObjects];
+    [self checkRequestsCount];
 }
 -(void)cancelAllRequestsForClient:(id)client{
 
     NSPredicate *predicate = [NSPredicate predicateWithFormat:@"client = %@", client];
     NSSet *toCancel = [_requestsInProgress filteredSetUsingPredicate:predicate];
+
+    iBefore = _requestsInProgress.count;
     
     for (MIJSONRequestManagerRequestObject *ro in toCancel) {
         
@@ -354,6 +385,9 @@ MIJSONRequestManagerLoginSessionType _sessionType;
         [request cancel];
         [_requestsInProgress removeObject:ro];
     }
+
+    [self checkRequestsCount];
+
     
 }
 #pragma mark - Action Request delegate:
@@ -369,6 +403,7 @@ MIJSONRequestManagerLoginSessionType _sessionType;
 -(void)actionProgressed:(MIJSONRequest *)action{
 
     //TODO: Calculate average progress:
+    [self updateTotalProgress];
 }
 -(void)action:(MIJSONRequest *)request failedWithError:(NSError *)error{
 
@@ -386,10 +421,15 @@ MIJSONRequestManagerLoginSessionType _sessionType;
         }
     }
     
+    iBefore = _requestsInProgress.count;
+    
     if (toRemove) {
     
         [_requestsInProgress removeObject:toRemove];
     }
+
+    [self checkRequestsCount];
+    
     
 }
 
@@ -423,6 +463,73 @@ DLog(@"MIJSONRequestManager -> App connection status changed to: %i  hostStatus:
     hs_before = hostStatus;
 	    
 }
+
+
+
+#pragma mark - Activity observers:
+
+-(void)checkRequestsCount{
+
+    NSUInteger iAfter = _requestsInProgress.count;
+    
+    if (iBefore > 0 && iAfter == 0) {
+        dispatch_async(dispatch_get_main_queue(), ^{
+        
+            [self finishedAll];
+        });
+        
+    }
+}
+-(void)resumed{
+
+    _totalBytesToDownload = _totalDownloadedBytes = 0;
+    
+    for (id<MIJSONRequestManagerActivityObserver>observer in _activityObservers) {
+        
+        [observer MIJSONRequestManagerDidResumeRequests:self];
+    }
+    
+}
+-(void)updateTotalProgress{
+
+    _totalBytesToDownload = _totalDownloadedBytes = 0;
+    for (MIJSONRequestManagerRequestObject *ro in _requestsInProgress) {
+        
+        MIJSONRequest *request = ro.request;
+        _totalBytesToDownload += request.expectedResponseSize;
+        _totalDownloadedBytes += request.downloadedBytes;
+    }
+    _totalProgress = (double)_totalBytesToDownload / (double)_totalDownloadedBytes;
+    
+    for (id<MIJSONRequestManagerActivityObserver>observer in _activityObservers) {
+        
+        [observer MIJSONRequestManager:self didUpdateTotalProgress:_totalProgress downloadedBytes:_totalDownloadedBytes totalBytesToDownload:_totalBytesToDownload requestsCount:_requestsInProgress.count];
+    }
+}
+-(void)finishedAll{
+
+    for (id<MIJSONRequestManagerActivityObserver>observer in _activityObservers) {
+        
+        [observer MIJSONRequestManagerDidFinishAllRequests:self downloadedBytes:_totalBytesToDownload];
+    }
+}
+
+-(NSMutableSet *)activityObservers{
+
+    if (!_activityObservers) {
+        _activityObservers = [[NSMutableSet alloc] initWithCapacity:5];
+    }
+    return _activityObservers;
+}
+-(void)addActivityObserver:(id<MIJSONRequestManagerActivityObserver>)activityObserver{
+
+    [self.activityObservers addObject:activityObserver];
+}
+-(void)removeActivityObserver:(id<MIJSONRequestManagerActivityObserver>)activityObserver{
+
+    [self.activityObservers removeObject:activityObserver];
+}
+
 
 @end
 

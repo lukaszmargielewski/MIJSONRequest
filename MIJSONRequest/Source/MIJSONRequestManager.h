@@ -21,6 +21,9 @@ typedef NS_ENUM(NSUInteger, MIJSONRequestManagerLoginSessionType){
     MIJSONRequestManagerLoginSession_AddedToRequestBody = 0,
     MIJSONRequestManagerLoginSession_AddedToRequestHTTPHeaders,
 };
+
+@protocol MIJSONRequestManagerActivityObserver;
+
 @interface MIJSONRequestManager : NSObject <MIJSONRequestDelegate> {
 
 	// Actions:
@@ -51,7 +54,6 @@ typedef NS_ENUM(NSUInteger, MIJSONRequestManagerLoginSessionType){
 @property (nonatomic, strong, readonly) MIJSONRequestSecureSession *loginSession;
 @property (nonatomic, strong) NSArray *sessionRequestKeys;
 @property (nonatomic) MIJSONRequestManagerLoginSessionType sessionType;
-
 
 #pragma mark - Default Manager:
 
@@ -105,9 +107,25 @@ typedef NS_ENUM(NSUInteger, MIJSONRequestManagerLoginSessionType){
 -(void)cancelAllRequests;
 -(void)cancelAllRequestsForClient:(id)client;
 
+-(void)addActivityObserver:(id<MIJSONRequestManagerActivityObserver>)activityObserver;
+-(void)removeActivityObserver:(id<MIJSONRequestManagerActivityObserver>)activityObserver;
 
 @end
-#pragma mark - Interbla object:
+
+@protocol MIJSONRequestManagerActivityObserver <NSObject>
+
+-(void)MIJSONRequestManagerDidResumeRequests:(MIJSONRequestManager *)manager;
+-(void)MIJSONRequestManagerDidFinishAllRequests:(MIJSONRequestManager *)manager downloadedBytes:(unsigned long long)downloadedBytes;
+
+-(void)MIJSONRequestManager:(MIJSONRequestManager *)manager
+     didUpdateTotalProgress:(float)progress
+            downloadedBytes:(unsigned long long)downloadedBytes
+       totalBytesToDownload:(unsigned long long)totalBytesToDownload
+              requestsCount:(NSUInteger)requestsCount;
+
+@end
+
+#pragma mark - Internal object:
 
 @interface MIJSONRequestManagerRequestObject : NSObject
 
@@ -120,5 +138,6 @@ typedef NS_ENUM(NSUInteger, MIJSONRequestManagerLoginSessionType){
                                  client:(id)client;
 
 @end
+
 
 
