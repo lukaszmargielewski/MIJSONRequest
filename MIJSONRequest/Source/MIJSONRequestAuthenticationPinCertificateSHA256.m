@@ -49,18 +49,16 @@
     
     NSString *serverCertificateDataHash = [MIJSONRequestAuthenticationPinCertificateSHA256 SHA256L:[serverCertificateData base64EncodedString]];
     
-    NSLog(@"Implement auth cert hwith hash: %@", serverCertificateDataHash);
-    
     // Check if the certificate returned from the server is identical to the saved certificate in
     // the main bundle
     BOOL areCertificatesEqual = ([serverCertificateDataHash isEqualToString:self.certificateSha]);
     
     if (!areCertificatesEqual)
     {
-        DLog(@"Bad Certificate, canceling request: %@", serverCertificateDataHash);
+        DLog(@"Bad Certificate sha: %@, canceling request.", serverCertificateDataHash);
         //[connection cancel];
     }else{
-        DLog(@"Good Certificate, allowing request: %@", serverCertificateDataHash);
+        DLog(@"Good Certificate sha: %@, allowing request....", serverCertificateDataHash);
     }
     // If the certificates are not equal we should not talk to the server;
     return areCertificatesEqual;
