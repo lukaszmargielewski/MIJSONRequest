@@ -88,8 +88,8 @@ typedef void(^MIJSONRequestManagerRequestCompletionBlock)(MIJSONRequest *action,
 #pragma mark - Authentication Protocol:
 
 @protocol MIJSONRequestAuthenticate <NSObject>
-@optional
 - (BOOL)action:(MIJSONRequest *)action connection:(NSURLConnection *)connection canAuthenticateAgainstProtectionSpace:(NSURLProtectionSpace *)protectionSpace;
+@optional
 - (void)action:(MIJSONRequest *)action connection:(NSURLConnection *)connection didReceiveAuthenticationChallenge:(NSURLAuthenticationChallenge *)challenge;
 
 @end

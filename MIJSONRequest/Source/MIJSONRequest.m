@@ -394,7 +394,7 @@
 
 - (BOOL)connection:(NSURLConnection *)connection canAuthenticateAgainstProtectionSpace:(NSURLProtectionSpace *)protectionSpace{
     
-    if (_authDelegate && [_authDelegate respondsToSelector:@selector(action:connection:canAuthenticateAgainstProtectionSpace:)]) {
+    if (_authDelegate) {
         return [_authDelegate action:self connection:connection canAuthenticateAgainstProtectionSpace:protectionSpace];
     }
     
