@@ -9,9 +9,12 @@
 #import "MIJSONRequestManager.h"
 #define kReachabilityChangedNotification @"kNetworkReachabilityChangedNotification"
 
+NSString *kMIJSONRequestManagerConnectionToHostChangedNotification = @"kMIJSONRequestManagerConnectionToHostChangedNotification";
+NSString *kMIJSONRequestManagerHttpMethodGET = @"GET";
+NSString *kMIJSONRequestManagerHttpMethodPOST = @"POST";
+
 @interface MIJSONRequestManager()
 
-@property (nonatomic, strong) NSArray *sessionRequestKeys;
 @end
 
 @implementation MIJSONRequestManager{
@@ -39,23 +42,60 @@
 }
  */
 
+#pragma mark - Default Manager:
+
+NSString *_urlString;
+NSString *_hostName;
+NSString *_loginSessionName;
+NSArray *_sessionRequestKeys;
+
+MIJSONRequestManagerLoginSessionType _sessionType;
+
++(void)configureDefaultManagerWithUrlString:(NSString *)urlString
+                                   hostName:(NSString *)hostName
+                           loginSessionName:(NSString *)loginSessionName{
+    
+    NSAssert1(_urlString == nil, @"MIHWebservices can be configred once only. _urlStrin already present = %@", _urlString);
+    
+    _urlString = urlString;
+    _hostName = hostName;
+    _loginSessionName = loginSessionName;
+
+}
+
++(instancetype)defaultManager{
+    
+    static dispatch_once_t pred;
+    static MIJSONRequestManager *shared = nil;
+    
+    dispatch_once(&pred, ^{
+
+        NSAssert1(_urlString != nil, @"MIHWebservices must be configured, before calling its request manager! call configureWithUrlString.... first", _urlString);
+        
+        shared = [MIJSONRequestManager requestManagerWithUrlString:_urlString hostName:_hostName loginSessionName:_loginSessionName];
+        
+        
+    });
+    return shared;
+    
+    
+}
+
+
 
 #pragma mark - Designated initializer:
 
 +(instancetype)requestManagerWithUrlString:(NSString *)urlString
                                   hostName:(NSString *)hostName
-                          loginSessionName:(NSString *)loginSessionName
-                        sessionRequestKeys:(NSArray *)sessionRequestKeys
-                               sessionType:(MIJSONRequestManagerLoginSessionType)sessionType{
+                          loginSessionName:(NSString *)loginSessionName{
 
-    MIJSONRequestManager *rm = [[MIJSONRequestManager alloc] initWithUrlString:urlString hostName:hostName loginSessionName:loginSessionName sessionRequestKeys:sessionRequestKeys sessionType:sessionType];
+    MIJSONRequestManager *rm = [[MIJSONRequestManager alloc] initWithUrlString:urlString hostName:hostName loginSessionName:loginSessionName];
     return rm;
 }
+
 -(instancetype)initWithUrlString:(NSString *)urlString
                         hostName:(NSString *)hostName
-                loginSessionName:(NSString *)loginSessionName
-              sessionRequestKeys:(NSArray *)sessionRequestKeys
-                     sessionType:(MIJSONRequestManagerLoginSessionType)sessionType{
+                loginSessionName:(NSString *)loginSessionName{
 
     NSAssert(urlString != nil, @"urlString must not be nil");
     NSAssert(hostName != nil, @"hostName must not be nil");
@@ -70,10 +110,10 @@
         hostStatus = NotReachable;        // Unknown
         hs_before = NotReachable;
         status_known = NO;
+        _httpMethodDefault = kMIJSONRequestManagerHttpMethodGET;
+
         
-        _sessionType = sessionType;
         if (loginSessionName) {
-            _sessionRequestKeys = sessionRequestKeys;
             _loginSession = [MIJSONRequestSecureSession sessionWithIdentifier:loginSessionName];
         }
         
@@ -89,8 +129,6 @@
 
 
 #pragma mark - Scheduling requests:
-
-
 
 -(MIJSONRequest *)startRequestWithJSONDictionary:(NSDictionary *)reqestDictionary
                            startBlock:(MIJSONRequestManagerRequestStartBlock)startBlock
@@ -160,8 +198,8 @@
         }
     }
     
-    NSMutableDictionary *finalRequestBody       = [NSMutableDictionary dictionaryWithCapacity:10];
-    NSMutableDictionary *finalHTTPHeaders    = [NSMutableDictionary dictionaryWithCapacity:10];
+    NSMutableDictionary *finalRequestBody = [NSMutableDictionary dictionaryWithCapacity:10];
+    NSMutableDictionary *finalHTTPHeaders = [NSMutableDictionary dictionaryWithCapacity:10];
     
     NSDictionary *sessionDictionary = _loginSession.sessionDictionary;
     
@@ -172,10 +210,10 @@
         if (loginSessionRequestValues) {
             
             switch (_sessionType) {
-                case MIJSONRequestManagerLoginSessionTypeRequestBody:
+                case MIJSONRequestManagerLoginSession_AddedToRequestBody:
                     [finalRequestBody addEntriesFromDictionary:loginSessionRequestValues];
                     break;
-                case MIJSONRequestManagerLoginSessionTypeRequestHTTPHeaders:
+                case MIJSONRequestManagerLoginSession_AddedToRequestHTTPHeaders:
                     [finalHTTPHeaders addEntriesFromDictionary:loginSessionRequestValues];
                     break;
                     
@@ -212,9 +250,11 @@
     
     MIJSONRequest *jsonRequest = [MIJSONRequest requestWithUrl:self.webserviceUrl httpHeaders:finalHTTPHeaders httpMethod:httpMethod body:finalRequestBody delegate:self];
     
-    jsonRequest.name = name;
-    
-    
+    jsonRequest.name            = name;
+    jsonRequest.startBlock      = startBlock;
+    jsonRequest.progressBlock   = progressBlock;
+    jsonRequest.completionBlock = completionBlock;
+    jsonRequest.authDelegate    = self.authDelegate;
         
         if (!_requestsInProgress) {
         
@@ -224,11 +264,6 @@
     MIJSONRequestManagerRequestObject *ro = [MIJSONRequestManagerRequestObject requestObjectWithRequest:jsonRequest
                                                                                                  client:client];
     [_requestsInProgress addObject:ro];
-    jsonRequest.startBlock = startBlock;
-    jsonRequest.progressBlock = progressBlock;
-    jsonRequest.completionBlock = completionBlock;
-    
-    jsonRequest.authDelegate = self.authDelegate;
     
     [jsonRequest start];
     

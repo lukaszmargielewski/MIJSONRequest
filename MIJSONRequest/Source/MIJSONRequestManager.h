@@ -11,12 +11,15 @@
 #import "Reachability.h"
 #import "MIJSONRequestSecureSession.h"
 
-#define kMIJSONRequestManagerConnectionToHostChangedNotification @"kMIJSONRequestManagerConnectionToHostChangedNotification"
+extern NSString *kMIJSONRequestManagerConnectionToHostChangedNotification;
+extern NSString *kMIJSONRequestManagerHttpMethodGET;
+extern NSString *kMIJSONRequestManagerHttpMethodPOST;
+
 
 typedef NS_ENUM(NSUInteger, MIJSONRequestManagerLoginSessionType){
 
-    MIJSONRequestManagerLoginSessionTypeRequestBody = 0,
-    MIJSONRequestManagerLoginSessionTypeRequestHTTPHeaders,
+    MIJSONRequestManagerLoginSession_AddedToRequestBody = 0,
+    MIJSONRequestManagerLoginSession_AddedToRequestHTTPHeaders,
 };
 @interface MIJSONRequestManager : NSObject <MIJSONRequestDelegate> {
 
@@ -47,20 +50,28 @@ typedef NS_ENUM(NSUInteger, MIJSONRequestManagerLoginSessionType){
 
 @property (nonatomic, strong, readonly) MIJSONRequestSecureSession *loginSession;
 @property (nonatomic) MIJSONRequestManagerLoginSessionType sessionType;
+@property (nonatomic, strong) NSArray *sessionRequestKeys;
+
+
+#pragma mark - Default Manager:
+
++(void)configureDefaultManagerWithUrlString:(NSString *)urlString
+                                   hostName:(NSString *)hostName
+                           loginSessionName:(NSString *)loginSessionName;
+
+
++(instancetype)defaultManager;
+
 
 #pragma mark - Init:
 
 +(instancetype)requestManagerWithUrlString:(NSString *)urlString
                                   hostName:(NSString *)hostName
-                          loginSessionName:(NSString *)loginSessionName
-                        sessionRequestKeys:(NSArray *)sessionRequestKeys
-                               sessionType:(MIJSONRequestManagerLoginSessionType)sessionType;
+                          loginSessionName:(NSString *)loginSessionName;
 
 -(instancetype)initWithUrlString:(NSString *)urlString
                         hostName:(NSString *)hostName
-                loginSessionName:(NSString *)loginSessionName
-              sessionRequestKeys:(NSArray *)sessionRequestKeys
-                     sessionType:(MIJSONRequestManagerLoginSessionType)sessionType NS_DESIGNATED_INITIALIZER;
+                loginSessionName:(NSString *)loginSessionName NS_DESIGNATED_INITIALIZER;
 
 
 #pragma mark - API:
