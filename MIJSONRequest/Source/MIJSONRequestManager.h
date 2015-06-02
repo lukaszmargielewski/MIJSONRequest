@@ -9,9 +9,15 @@
 #import <Foundation/Foundation.h>
 #import "MIJSONRequest.h"
 #import "Reachability.h"
+#import "MIJSONRequestSecureSession.h"
 
 #define kMIJSONRequestManagerConnectionToHostChangedNotification @"kMIJSONRequestManagerConnectionToHostChangedNotification"
 
+typedef NS_ENUM(NSUInteger, MIJSONRequestManagerLoginSessionType){
+
+    MIJSONRequestManagerLoginSessionTypeRequestBody = 0,
+    MIJSONRequestManagerLoginSessionTypeRequestHTTPHeaders,
+};
 @interface MIJSONRequestManager : NSObject <MIJSONRequestDelegate> {
 
 	// Actions:
@@ -39,10 +45,22 @@
 @property (nonatomic, readonly) NetworkStatus hostStatus;
 @property (nonatomic, assign) id<MIJSONRequestAuthenticate>authDelegate;
 
+@property (nonatomic, strong, readonly) MIJSONRequestSecureSession *loginSession;
+@property (nonatomic) MIJSONRequestManagerLoginSessionType sessionType;
+
 #pragma mark - Init:
 
-+(instancetype)requestManagerWithUrlString:(NSString *)urlString hostName:(NSString *)hostName;
--(instancetype)initWithUrlString:(NSString *)urlString hostName:(NSString *)hostName NS_DESIGNATED_INITIALIZER;
++(instancetype)requestManagerWithUrlString:(NSString *)urlString
+                                  hostName:(NSString *)hostName
+                          loginSessionName:(NSString *)loginSessionName
+                        sessionRequestKeys:(NSArray *)sessionRequestKeys
+                               sessionType:(MIJSONRequestManagerLoginSessionType)sessionType;
+
+-(instancetype)initWithUrlString:(NSString *)urlString
+                        hostName:(NSString *)hostName
+                loginSessionName:(NSString *)loginSessionName
+              sessionRequestKeys:(NSArray *)sessionRequestKeys
+                     sessionType:(MIJSONRequestManagerLoginSessionType)sessionType NS_DESIGNATED_INITIALIZER;
 
 
 #pragma mark - API:

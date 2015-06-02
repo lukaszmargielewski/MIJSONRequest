@@ -85,14 +85,18 @@
     return dict;
 }
 
+-(NSString *)autologinKey{
+
+    return [NSString stringWithFormat:@"autologin_disabled_%@",  _identifier];
+}
 -(void)setAutoLoginEnabled:(BOOL)autologinEnabled{
 
-    [[NSUserDefaults standardUserDefaults] setBool:!autologinEnabled forKey:@"autologin_disabled"];
+    [[NSUserDefaults standardUserDefaults] setBool:!autologinEnabled forKey:[self autologinKey]];
     [[NSUserDefaults standardUserDefaults] synchronize];
 }
 -(BOOL)isAutoLoginEnabled{
 
-    return ![[NSUserDefaults standardUserDefaults] boolForKey:@"autologin_disabled"];
+    return ![[NSUserDefaults standardUserDefaults] boolForKey:[self autologinKey]];
 }
 
 -(NSDictionary *)sessionDictionary{

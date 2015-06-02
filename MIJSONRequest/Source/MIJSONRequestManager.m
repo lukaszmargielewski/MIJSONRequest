@@ -9,6 +9,11 @@
 #import "MIJSONRequestManager.h"
 #define kReachabilityChangedNotification @"kNetworkReachabilityChangedNotification"
 
+@interface MIJSONRequestManager()
+
+@property (nonatomic, strong) NSArray *sessionRequestKeys;
+@end
+
 @implementation MIJSONRequestManager{
     
     NSMutableSet *_requestsInProgress;
@@ -16,6 +21,7 @@
 }
 @synthesize connected = connected, connected_before;
 @synthesize hostStatus;
+@synthesize loginSession = _loginSession;
 
 -(void)dealloc{
 	
@@ -36,12 +42,20 @@
 
 #pragma mark - Designated initializer:
 
-+(instancetype)requestManagerWithUrlString:(NSString *)urlString hostName:(NSString *)hostName{
++(instancetype)requestManagerWithUrlString:(NSString *)urlString
+                                  hostName:(NSString *)hostName
+                          loginSessionName:(NSString *)loginSessionName
+                        sessionRequestKeys:(NSArray *)sessionRequestKeys
+                               sessionType:(MIJSONRequestManagerLoginSessionType)sessionType{
 
-    MIJSONRequestManager *rm = [[MIJSONRequestManager alloc] initWithUrlString:urlString hostName:hostName];
+    MIJSONRequestManager *rm = [[MIJSONRequestManager alloc] initWithUrlString:urlString hostName:hostName loginSessionName:loginSessionName sessionRequestKeys:sessionRequestKeys sessionType:sessionType];
     return rm;
 }
--(instancetype)initWithUrlString:(NSString *)urlString hostName:(NSString *)hostName{
+-(instancetype)initWithUrlString:(NSString *)urlString
+                        hostName:(NSString *)hostName
+                loginSessionName:(NSString *)loginSessionName
+              sessionRequestKeys:(NSArray *)sessionRequestKeys
+                     sessionType:(MIJSONRequestManagerLoginSessionType)sessionType{
 
     NSAssert(urlString != nil, @"urlString must not be nil");
     NSAssert(hostName != nil, @"hostName must not be nil");
@@ -56,6 +70,12 @@
         hostStatus = NotReachable;        // Unknown
         hs_before = NotReachable;
         status_known = NO;
+        
+        _sessionType = sessionType;
+        if (loginSessionName) {
+            _sessionRequestKeys = sessionRequestKeys;
+            _loginSession = [MIJSONRequestSecureSession sessionWithIdentifier:loginSessionName];
+        }
         
         _hostReachable = [Reachability reachabilityWithHostName:self.hostName];
         [_hostReachable startNotifier];
@@ -140,34 +160,60 @@
         }
     }
     
+    NSMutableDictionary *finalRequestBody       = [NSMutableDictionary dictionaryWithCapacity:10];
+    NSMutableDictionary *finalHTTPHeaders    = [NSMutableDictionary dictionaryWithCapacity:10];
     
-    // Add default request parameters (if specified), f.x: login session, etc...
+    NSDictionary *sessionDictionary = _loginSession.sessionDictionary;
+    
+    // 1. Add Login session parameters:
+    if(sessionDictionary && sessionDictionary.allKeys.count){
+        
+        NSDictionary *loginSessionRequestValues = _sessionRequestKeys ? [sessionDictionary dictionaryWithValuesForKeys:_sessionRequestKeys] : sessionDictionary;
+        if (loginSessionRequestValues) {
+            
+            switch (_sessionType) {
+                case MIJSONRequestManagerLoginSessionTypeRequestBody:
+                    [finalRequestBody addEntriesFromDictionary:loginSessionRequestValues];
+                    break;
+                case MIJSONRequestManagerLoginSessionTypeRequestHTTPHeaders:
+                    [finalHTTPHeaders addEntriesFromDictionary:loginSessionRequestValues];
+                    break;
+                    
+                default:
+                    break;
+            }
+            
+        }
+    }
+    
+    // 2. Add default request parameters (if specified), f.x: login session, etc...
     if (self.requestParametersDefault && self.requestParametersDefault.allKeys.count) {
         
-        NSMutableDictionary *ddd = [NSMutableDictionary dictionaryWithDictionary:self.requestParametersDefault];
-        if (reqestDictionary) {
-        
-            [ddd addEntriesFromDictionary:reqestDictionary];
-        }
-        
-        reqestDictionary = (NSDictionary *)ddd;
+            [finalRequestBody addEntriesFromDictionary:_requestParametersDefault];
     }
     
-    // Add default http headers (if specified), f.ex: login session or auth secrets, etc...
+    if (reqestDictionary && reqestDictionary.allKeys.count) {
+        
+        [finalRequestBody addEntriesFromDictionary:reqestDictionary];
+    }
+    
+    // 3. Add default http headers (if specified), f.ex: login session or auth secrets, etc...
     if (self.httpHeadersDefault && self.httpHeadersDefault.allKeys.count) {
         
-        NSMutableDictionary *ddd = [NSMutableDictionary dictionaryWithDictionary:self.httpHeadersDefault];
-        if (httpHeaders) {
-        
-            [ddd addEntriesFromDictionary:httpHeaders];
-        }
-        
-        httpHeaders = (NSDictionary *)ddd;
+        [finalHTTPHeaders addEntriesFromDictionary:_httpHeadersDefault];
     }
     
-    MIJSONRequest *jsonRequest = [MIJSONRequest requestWithUrl:self.webserviceUrl httpHeaders:httpHeaders httpMethod:httpMethod body:reqestDictionary delegate:self];
+    if (httpHeaders && httpHeaders.allKeys.count) {
+        
+        [finalHTTPHeaders addEntriesFromDictionary:httpHeaders];
+    }
+
+    
+    
+    MIJSONRequest *jsonRequest = [MIJSONRequest requestWithUrl:self.webserviceUrl httpHeaders:finalHTTPHeaders httpMethod:httpMethod body:finalRequestBody delegate:self];
     
     jsonRequest.name = name;
+    
     
         
         if (!_requestsInProgress) {
