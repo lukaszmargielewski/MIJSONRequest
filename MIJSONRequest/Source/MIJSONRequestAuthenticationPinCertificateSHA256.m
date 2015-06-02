@@ -6,13 +6,11 @@
 //  Copyright (c) 2015 Lukasz Margielewski. All rights reserved.
 //
 
-#import "MIJSONRequestAuthenticateExample.h"
+#import "MIJSONRequestAuthenticationPinCertificateSHA256.h"
 #import <CommonCrypto/CommonDigest.h>
 #import "NSData+Base64.h"
 
-#define EXPECTED_CERTIFICATE_BASE64_SHA256 @"a002f3b1adc0605d06ffb5f6bab9afeee7299f2b2c6a69b24c14c6b6409c92c9"
-
-@implementation MIJSONRequestAuthenticateExample
+@implementation MIJSONRequestAuthenticationPinCertificateSHA256
 
 /**
  * Computes a SHA256 hash of the string.
@@ -49,24 +47,21 @@
     
     NSData* serverCertificateData = (__bridge NSData*)SecCertificateCopyData(certificate);
     
-    NSString *serverCertificateDataHash = [MIJSONRequestAuthenticateExample SHA256L:[serverCertificateData base64EncodedString]];
+    NSString *serverCertificateDataHash = [MIJSONRequestAuthenticationPinCertificateSHA256 SHA256L:[serverCertificateData base64EncodedString]];
     
     NSLog(@"Implement auth cert hwith hash: %@", serverCertificateDataHash);
-    return YES;
-    
     
     // Check if the certificate returned from the server is identical to the saved certificate in
     // the main bundle
-    BOOL areCertificatesEqual = ([serverCertificateDataHash isEqualToString:EXPECTED_CERTIFICATE_BASE64_SHA256]);
+    BOOL areCertificatesEqual = ([serverCertificateDataHash isEqualToString:self.certificateSha]);
     
     if (!areCertificatesEqual)
     {
-        //DLog(@"Bad Certificate, canceling request: %@", serverCertificateDataHash);
-        //[connection cancel];
+        DLog(@"Bad Certificate, canceling request: %@", serverCertificateDataHash);
+        [connection cancel];
     }else{
-        //DLog(@"Good Certificate, allowing request: %@", serverCertificateDataHash);
+        DLog(@"Good Certificate, allowing request: %@", serverCertificateDataHash);
     }
-    return YES;
     // If the certificates are not equal we should not talk to the server;
     return areCertificatesEqual;
 }

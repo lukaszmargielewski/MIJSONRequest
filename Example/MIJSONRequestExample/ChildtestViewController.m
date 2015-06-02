@@ -19,13 +19,13 @@
 
 - (void)dealloc{
 
-    [self.requestManager cancelRequest:request];
+    [[MIJSONRequestManager defaultManager] cancelRequest:request];
 }
 ///*
 -(void)viewWillDisappear:(BOOL)animated{
 
-    [self.requestManager cancelAllRequestsForClient:self];
-    [self.requestManager cancelRequest:request];
+    [[MIJSONRequestManager defaultManager] cancelAllRequestsForClient:self];
+    [[MIJSONRequestManager defaultManager] cancelRequest:request];
 }
 // */
 - (void)viewDidLoad {
@@ -63,7 +63,7 @@
 
     __block ChildtestViewController *blockSelf = self;
     
-    request = [self.requestManager startRequestWithJSONDictionary:@{@"action" : @"validate", @"signup_code" : @"mf2100"} startBlock:^(MIJSONRequest *request, BOOL started){
+    request = [[MIJSONRequestManager defaultManager] startRequestWithJSONDictionary:@{@"action" : @"validate", @"signup_code" : @"mf2100"} startBlock:^(MIJSONRequest *request, BOOL started){
         
         NSLog(@"started: %i", started);
         

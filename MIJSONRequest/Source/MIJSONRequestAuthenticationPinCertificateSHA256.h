@@ -9,6 +9,8 @@
 #import <Foundation/Foundation.h>
 #import "MIJSONRequest.h"
 
-@interface MIJSONRequestAuthenticateExample : NSObject<MIJSONRequestAuthenticate>
+@interface MIJSONRequestAuthenticationPinCertificateSHA256 : NSObject<MIJSONRequestAuthenticationDelegate>
+
+@property (nonatomic, copy) NSString *certificateSha;
 
 @end
