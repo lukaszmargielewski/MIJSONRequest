@@ -7,7 +7,8 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "MIJSONRequest.h"
+#import "MIJSONRequestAuthenticate.h"
+
 
 @interface MIJSONRequestAuthenticationPinCertificateSHA256 : NSObject<MIJSONRequestAuthenticationDelegate>
 

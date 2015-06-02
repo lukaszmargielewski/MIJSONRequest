@@ -18,9 +18,6 @@
 
 - (void)dealloc{
     
-//DLog(@"AR dealloc: %@", self.actionName);
-
-    //DLog(@"dealloc connection for action:%@", self.actionName);
 	[self cancel];
     
     [[NSNotificationCenter defaultCenter] removeObserver:self];
@@ -122,7 +119,6 @@
             if (_connection) {
             
                 _responseRawData    = [NSMutableData data];
-                [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
                 _downloading = YES;
                 startTime = [[NSDate date] timeIntervalSince1970];
                 
@@ -156,13 +152,11 @@
     _synchronyous = YES;
     _downloading = YES;
     sendTime = [[NSDate date] timeIntervalSince1970];
-    [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
     
 		//////////
 		NSHTTPURLResponse *aResponse = NULL;
 		NSError *error = nil;
 		_responseRawData  = (NSMutableData *)[NSURLConnection sendSynchronousRequest:request returningResponse:&aResponse error:&error];
-		[UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
     
     if (_responseRawData && !error) {
         
@@ -193,8 +187,6 @@
     _responseRawData = nil;
     _jsonResponse = nil;
 	_downloading = NO;
-    
-	[UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
     
     if (_completionBlock) {
         __block MIJSONRequest *rrr = self;
@@ -307,8 +299,6 @@
     _responseRawData = nil;
     _connection = nil;
 	_downloading = NO;
-	
-    [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
     
     if (_completionBlock) {
         __block MIJSONRequest *rrr = self;
@@ -386,32 +376,6 @@
         });
     });
         
-}
-
-
-#pragma mark - Authentication:
-
-
-- (BOOL)connection:(NSURLConnection *)connection canAuthenticateAgainstProtectionSpace:(NSURLProtectionSpace *)protectionSpace{
-    
-    if (_authDelegate) {
-        return [_authDelegate action:self connection:connection canAuthenticateAgainstProtectionSpace:protectionSpace];
-    }
-    
-    return YES;
-}
-- (void)connection:(NSURLConnection *)connection didReceiveAuthenticationChallenge:(NSURLAuthenticationChallenge *)challenge {
-    
-    
-    if (_authDelegate && [_authDelegate respondsToSelector:@selector(action:connection:didReceiveAuthenticationChallenge:)]) {
-        
-        [_authDelegate action:self connection:connection didReceiveAuthenticationChallenge:challenge];
-        
-    }else{
-        
-        [challenge.sender continueWithoutCredentialForAuthenticationChallenge:challenge];
-    }
-    
 }
 
 @end

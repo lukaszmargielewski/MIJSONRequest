@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		A14EDBE11B1C3FAD00CF5C9D /* NSData+Base64.m in Sources */ = {isa = PBXBuildFile; fileRef = A14EDBE01B1C3FAD00CF5C9D /* NSData+Base64.m */; };
 		A14EDBE41B1C686C00CF5C9D /* ChildtestViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A14EDBE31B1C686C00CF5C9D /* ChildtestViewController.m */; };
 		A14EDBE71B1C830500CF5C9D /* MIJSONRequestSecureSession.m in Sources */ = {isa = PBXBuildFile; fileRef = A14EDBE61B1C830500CF5C9D /* MIJSONRequestSecureSession.m */; };
 		A14EDBEA1B1C869800CF5C9D /* KeychainItemWrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = A14EDBE91B1C869800CF5C9D /* KeychainItemWrapper.m */; };
@@ -22,6 +21,8 @@
 		A17386681B18A15300750B53 /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = A17386641B18A15300750B53 /* Reachability.m */; };
 		A17386691B18A15300750B53 /* MIJSONRequestManager.m in Sources */ = {isa = PBXBuildFile; fileRef = A17386661B18A15300750B53 /* MIJSONRequestManager.m */; };
 		A1A92DF11B1E204000F59597 /* MIJSONRequestAuthenticationPinCertificateSHA256.m in Sources */ = {isa = PBXBuildFile; fileRef = A1A92DF01B1E204000F59597 /* MIJSONRequestAuthenticationPinCertificateSHA256.m */; };
+		A1A92DFA1B1E27B200F59597 /* NSData+Base64.m in Sources */ = {isa = PBXBuildFile; fileRef = A1A92DF91B1E27B200F59597 /* NSData+Base64.m */; };
+		A1A92E001B1E31AE00F59597 /* MIJSONRequestAuthenticate.m in Sources */ = {isa = PBXBuildFile; fileRef = A1A92DFF1B1E31AE00F59597 /* MIJSONRequestAuthenticate.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -35,8 +36,6 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		A14EDBDF1B1C3FAD00CF5C9D /* NSData+Base64.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSData+Base64.h"; sourceTree = "<group>"; };
-		A14EDBE01B1C3FAD00CF5C9D /* NSData+Base64.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSData+Base64.m"; sourceTree = "<group>"; };
 		A14EDBE21B1C686C00CF5C9D /* ChildtestViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChildtestViewController.h; sourceTree = "<group>"; };
 		A14EDBE31B1C686C00CF5C9D /* ChildtestViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChildtestViewController.m; sourceTree = "<group>"; };
 		A14EDBE51B1C830500CF5C9D /* MIJSONRequestSecureSession.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MIJSONRequestSecureSession.h; sourceTree = "<group>"; };
@@ -64,6 +63,10 @@
 		A17386661B18A15300750B53 /* MIJSONRequestManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MIJSONRequestManager.m; sourceTree = "<group>"; };
 		A1A92DEF1B1E204000F59597 /* MIJSONRequestAuthenticationPinCertificateSHA256.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MIJSONRequestAuthenticationPinCertificateSHA256.h; sourceTree = "<group>"; };
 		A1A92DF01B1E204000F59597 /* MIJSONRequestAuthenticationPinCertificateSHA256.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MIJSONRequestAuthenticationPinCertificateSHA256.m; sourceTree = "<group>"; };
+		A1A92DF81B1E27B200F59597 /* NSData+Base64.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSData+Base64.h"; sourceTree = "<group>"; };
+		A1A92DF91B1E27B200F59597 /* NSData+Base64.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSData+Base64.m"; sourceTree = "<group>"; };
+		A1A92DFE1B1E31AE00F59597 /* MIJSONRequestAuthenticate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MIJSONRequestAuthenticate.h; sourceTree = "<group>"; };
+		A1A92DFF1B1E31AE00F59597 /* MIJSONRequestAuthenticate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MIJSONRequestAuthenticate.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -106,8 +109,6 @@
 		A17386381B18A04D00750B53 /* MIJSONRequestExample */ = {
 			isa = PBXGroup;
 			children = (
-				A14EDBDF1B1C3FAD00CF5C9D /* NSData+Base64.h */,
-				A14EDBE01B1C3FAD00CF5C9D /* NSData+Base64.m */,
 				A173863D1B18A04D00750B53 /* AppDelegate.h */,
 				A173863E1B18A04D00750B53 /* AppDelegate.m */,
 				A17386401B18A04D00750B53 /* ViewController.h */,
@@ -160,6 +161,8 @@
 		A17386601B18A15300750B53 /* Source */ = {
 			isa = PBXGroup;
 			children = (
+				A1A92DF81B1E27B200F59597 /* NSData+Base64.h */,
+				A1A92DF91B1E27B200F59597 /* NSData+Base64.m */,
 				A1A92DEF1B1E204000F59597 /* MIJSONRequestAuthenticationPinCertificateSHA256.h */,
 				A1A92DF01B1E204000F59597 /* MIJSONRequestAuthenticationPinCertificateSHA256.m */,
 				A17386631B18A15300750B53 /* Reachability.h */,
@@ -170,6 +173,8 @@
 				A14EDBE61B1C830500CF5C9D /* MIJSONRequestSecureSession.m */,
 				A17386611B18A15300750B53 /* MIJSONRequest.h */,
 				A17386621B18A15300750B53 /* MIJSONRequest.m */,
+				A1A92DFE1B1E31AE00F59597 /* MIJSONRequestAuthenticate.h */,
+				A1A92DFF1B1E31AE00F59597 /* MIJSONRequestAuthenticate.m */,
 				A17386651B18A15300750B53 /* MIJSONRequestManager.h */,
 				A17386661B18A15300750B53 /* MIJSONRequestManager.m */,
 			);
@@ -279,11 +284,12 @@
 				A1A92DF11B1E204000F59597 /* MIJSONRequestAuthenticationPinCertificateSHA256.m in Sources */,
 				A14EDBE71B1C830500CF5C9D /* MIJSONRequestSecureSession.m in Sources */,
 				A17386421B18A04D00750B53 /* ViewController.m in Sources */,
+				A1A92DFA1B1E27B200F59597 /* NSData+Base64.m in Sources */,
 				A17386671B18A15300750B53 /* MIJSONRequest.m in Sources */,
 				A173863F1B18A04D00750B53 /* AppDelegate.m in Sources */,
+				A1A92E001B1E31AE00F59597 /* MIJSONRequestAuthenticate.m in Sources */,
 				A17386691B18A15300750B53 /* MIJSONRequestManager.m in Sources */,
 				A14EDBEA1B1C869800CF5C9D /* KeychainItemWrapper.m in Sources */,
-				A14EDBE11B1C3FAD00CF5C9D /* NSData+Base64.m in Sources */,
 				A173863C1B18A04D00750B53 /* main.m in Sources */,
 				A14EDBE41B1C686C00CF5C9D /* ChildtestViewController.m in Sources */,
 				A17386681B18A15300750B53 /* Reachability.m in Sources */,

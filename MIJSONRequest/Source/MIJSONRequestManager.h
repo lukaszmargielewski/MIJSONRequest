@@ -7,7 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "MIJSONRequest.h"
+#import "MIJSONRequestAuthenticate.h"
 #import "Reachability.h"
 #import "MIJSONRequestSecureSession.h"
 

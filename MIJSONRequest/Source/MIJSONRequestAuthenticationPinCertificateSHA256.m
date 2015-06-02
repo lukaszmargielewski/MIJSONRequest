@@ -58,7 +58,7 @@
     if (!areCertificatesEqual)
     {
         DLog(@"Bad Certificate, canceling request: %@", serverCertificateDataHash);
-        [connection cancel];
+        //[connection cancel];
     }else{
         DLog(@"Good Certificate, allowing request: %@", serverCertificateDataHash);
     }
