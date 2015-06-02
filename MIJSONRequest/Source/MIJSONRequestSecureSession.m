@@ -17,6 +17,7 @@
 
  
     KeychainItemWrapper *_keychainSession;
+    BOOL _sessionRetrievalTried;
     
 }
 @synthesize sessionDictionary = _sessionDictionary;
@@ -45,11 +46,16 @@
 
     NSAssert(identifier != nil && identifier.length > 0, @"MIJSONRequestSecureSession must have identifier");
     
-    return [[MIJSONRequestSecureSession alloc] initWithIdentifier:identifier];
+    self = [super init];
+    if (self) {
+        _identifier = identifier;
+    }
+    return self;
 }
 -(void)storeSession:(NSDictionary *)sessionDictionary accountName:(NSString *)accountName{
 
     _sessionDictionary = sessionDictionary;
+    _sessionRetrievalTried = NO;
     
     if (accountName) {
     
@@ -74,6 +80,7 @@
 }
 -(void)destroySession{
 
+    _sessionRetrievalTried = NO;
     _sessionDictionary = nil;
     [self.keychainSession resetKeychainItem];
 }
@@ -91,6 +98,7 @@
 }
 -(void)setAutoLoginEnabled:(BOOL)autologinEnabled{
 
+    _sessionRetrievalTried = NO;
     [[NSUserDefaults standardUserDefaults] setBool:!autologinEnabled forKey:[self autologinKey]];
     [[NSUserDefaults standardUserDefaults] synchronize];
 }
@@ -101,8 +109,9 @@
 
 -(NSDictionary *)sessionDictionary{
     
-    if (!_sessionDictionary) {
+    if (!_sessionDictionary && !_sessionRetrievalTried) {
         
+        _sessionRetrievalTried = YES;
         BOOL autologin = [self isAutoLoginEnabled];
         if (autologin) {
         
@@ -114,5 +123,5 @@
     return _sessionDictionary;
 }
 
-
+-(BOOL)isValid{ return self.sessionDictionary != nil;}
 @end

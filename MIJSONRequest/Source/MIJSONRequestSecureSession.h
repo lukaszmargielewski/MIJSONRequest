@@ -18,6 +18,8 @@
 +(instancetype)sessionWithIdentifier:(NSString *)identifier;
 -(instancetype)initWithIdentifier:(NSString *)identifier NS_DESIGNATED_INITIALIZER;
 
+-(BOOL)isValid;
+
 -(void)storeSession:(NSDictionary *)sessionDictionary accountName:(NSString *)accountName;
 -(void)destroySession;
 

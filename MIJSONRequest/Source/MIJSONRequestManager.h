@@ -49,8 +49,8 @@ typedef NS_ENUM(NSUInteger, MIJSONRequestManagerLoginSessionType){
 @property (nonatomic, assign) id<MIJSONRequestAuthenticate>authDelegate;
 
 @property (nonatomic, strong, readonly) MIJSONRequestSecureSession *loginSession;
-@property (nonatomic) MIJSONRequestManagerLoginSessionType sessionType;
 @property (nonatomic, strong) NSArray *sessionRequestKeys;
+@property (nonatomic) MIJSONRequestManagerLoginSessionType sessionType;
 
 
 #pragma mark - Default Manager:
