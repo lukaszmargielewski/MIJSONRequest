@@ -21,7 +21,7 @@ typedef void(^MIJSONRequestManagerRequestCompletionBlock)(MIJSONRequest *action,
 // Use: completionBlock:(MIJSONRequestManagerRequestCompletionBlock)completionBlock;
 
 @protocol MIJSONRequestDelegate;
-@protocol MIJSONRequestAuthenticate;
+@protocol MIJSONRequestAuthenticationDelegate;
 
 
 @interface MIJSONRequest : NSObject
@@ -32,7 +32,7 @@ typedef void(^MIJSONRequestManagerRequestCompletionBlock)(MIJSONRequest *action,
 @property (nonatomic, strong) NSString *name;
 
 @property (nonatomic, assign) id <MIJSONRequestDelegate> delegate;
-@property (nonatomic, assign) id <MIJSONRequestAuthenticate> authDelegate;
+@property (nonatomic, assign) id <MIJSONRequestAuthenticationDelegate> authDelegate;
 
 @property (nonatomic, strong, readonly) NSURL *url;
 @property (nonatomic, strong) NSString *httpMethod;
@@ -87,7 +87,7 @@ typedef void(^MIJSONRequestManagerRequestCompletionBlock)(MIJSONRequest *action,
 
 #pragma mark - Authentication Protocol:
 
-@protocol MIJSONRequestAuthenticate <NSObject>
+@protocol MIJSONRequestAuthenticationDelegate <NSObject>
 - (BOOL)action:(MIJSONRequest *)action connection:(NSURLConnection *)connection canAuthenticateAgainstProtectionSpace:(NSURLProtectionSpace *)protectionSpace;
 @optional
 - (void)action:(MIJSONRequest *)action connection:(NSURLConnection *)connection didReceiveAuthenticationChallenge:(NSURLAuthenticationChallenge *)challenge;

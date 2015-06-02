@@ -46,7 +46,7 @@ typedef NS_ENUM(NSUInteger, MIJSONRequestManagerLoginSessionType){
 
 @property (nonatomic, readonly) BOOL connected, connected_before;
 @property (nonatomic, readonly) NetworkStatus hostStatus;
-@property (nonatomic, assign) id<MIJSONRequestAuthenticate>authDelegate;
+@property (nonatomic, assign) id<MIJSONRequestAuthenticationDelegate>authDelegate;
 
 @property (nonatomic, strong, readonly) MIJSONRequestSecureSession *loginSession;
 @property (nonatomic, strong) NSArray *sessionRequestKeys;
