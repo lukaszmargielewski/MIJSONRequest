@@ -230,7 +230,6 @@
         _cancelTimer = nil;  
     }
     
-    _showProgress = (_showProgress && _expectedResponseSize > 50000);
     _downloading = YES;
     
     if(_startBlock){

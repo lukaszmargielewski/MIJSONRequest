@@ -264,7 +264,7 @@ MIJSONRequestManagerLoginSessionType _sessionType;
         jsonRequest = [MIJSONRequest requestWithUrl:self.webserviceUrl httpHeaders:finalHTTPHeaders httpMethod:httpMethod body:finalRequestBody delegate:self];
         
     }
-    
+    jsonRequest.showProgress    = YES;
     jsonRequest.name            = name;
     jsonRequest.startBlock      = startBlock;
     jsonRequest.progressBlock   = progressBlock;
@@ -277,21 +277,17 @@ MIJSONRequestManagerLoginSessionType _sessionType;
     
     MIJSONRequestManagerRequestObject *ro = [MIJSONRequestManagerRequestObject requestObjectWithRequest:jsonRequest
                                                                                                  client:client];
-    [_requestsInProgress addObject:ro];
     
-    [jsonRequest start];
-    
-    
-    NSUInteger iBefore = _requestsInProgress.count;
+    iBefore = _requestsInProgress.count;
     [_requestsInProgress addObject:ro];
     
     [jsonRequest start];
     
     if (iBefore == 0) {
-        dispatch_async(dispatch_get_main_queue(), ^{
+        //dispatch_async(dispatch_get_main_queue(), ^{
         
             [self resumed];
-        });
+        //});
         
     }
     
@@ -473,10 +469,10 @@ DLog(@"MIJSONRequestManager -> App connection status changed to: %i  hostStatus:
     NSUInteger iAfter = _requestsInProgress.count;
     
     if (iBefore > 0 && iAfter == 0) {
-        dispatch_async(dispatch_get_main_queue(), ^{
+        //dispatch_async(dispatch_get_main_queue(), ^{
         
             [self finishedAll];
-        });
+        //});
         
     }
 }
@@ -499,7 +495,7 @@ DLog(@"MIJSONRequestManager -> App connection status changed to: %i  hostStatus:
         _totalBytesToDownload += request.expectedResponseSize;
         _totalDownloadedBytes += request.downloadedBytes;
     }
-    _totalProgress = (double)_totalBytesToDownload / (double)_totalDownloadedBytes;
+    _totalProgress = _totalBytesToDownload ? (double)_totalDownloadedBytes / (double)_totalBytesToDownload : 0;
     
     for (id<MIJSONRequestManagerActivityObserver>observer in _activityObservers) {
         
@@ -507,7 +503,7 @@ DLog(@"MIJSONRequestManager -> App connection status changed to: %i  hostStatus:
     }
 }
 -(void)finishedAll{
-
+    
     for (id<MIJSONRequestManagerActivityObserver>observer in _activityObservers) {
         
         [observer MIJSONRequestManagerDidFinishAllRequests:self downloadedBytes:_totalBytesToDownload];
