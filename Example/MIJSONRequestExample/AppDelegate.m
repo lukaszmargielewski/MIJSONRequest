@@ -17,19 +17,28 @@
 
 @interface AppDelegate ()
 @property (nonatomic, strong) MIJSONRequestAuthenticationPinCertificateSHA256 *exampleAuthenticate;
+@property (nonatomic, strong) MIJSONRequestManager *requestManager;
 @end
 
 @implementation AppDelegate
 
++ (MIJSONRequestManager *)requestManager{
+
+    AppDelegate *appDel = (AppDelegate *)[[UIApplication sharedApplication] delegate];
+    return appDel.requestManager;
+}
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
     
-    [MIJSONRequestManager configureDefaultManagerWithUrlString:WEBSERVICE_URL hostName:HOST_NAME loginSessionName:SECURE_SESSION_NAME];
-    [MIJSONRequestManager defaultManager].httpMethodDefault = kMIJSONRequestManagerHttpMethodPOST;
-    _exampleAuthenticate = [[MIJSONRequestAuthenticationPinCertificateSHA256 alloc] init];
-    _exampleAuthenticate.certificateSha = EXPECTED_CERTIFICATE_BASE64_SHA256;
-    [MIJSONRequestManager defaultManager].authDelegate = _exampleAuthenticate;
+    self.requestManager = [MIJSONRequestManager requestManagerWithUrlString:WEBSERVICE_URL
+                                                                   hostName:HOST_NAME
+                                                           loginSessionName:SECURE_SESSION_NAME];
+    
+    self.requestManager.httpMethodDefault   = kMIJSONRequestManagerHttpMethodPOST;
+    self.exampleAuthenticate                = [[MIJSONRequestAuthenticationPinCertificateSHA256 alloc] init];
+    self.exampleAuthenticate.certificateSha = EXPECTED_CERTIFICATE_BASE64_SHA256;
+    self.requestManager.authDelegate        = self.exampleAuthenticate;
     
     return YES;
 }

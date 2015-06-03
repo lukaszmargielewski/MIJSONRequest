@@ -458,6 +458,15 @@ DLog(@"MIJSONRequestManager connection status changed from: %i to: %i\n\n", conn
                             @"hostStatusBefore": [NSNumber numberWithInt:hs_before]};
 DLog(@"MIJSONRequestManager -> App connection status changed to: %i  hostStatus: %li", connected, (long)hostStatus);
         [[NSNotificationCenter defaultCenter] postNotificationName:kMIJSONRequestManagerConnectionToHostChangedNotification object:ui userInfo:ui];
+        
+        for (id<MIJSONRequestManagerActivityObserver>observer in _activityObservers) {
+            
+            if ([observer respondsToSelector:@selector(MIJSONRequestManager:connectionToHostChanged:)]) {
+            
+                [observer MIJSONRequestManager:self connectionToHostChanged:connected];
+            }
+            
+        }
     }
         
 

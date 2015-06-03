@@ -7,11 +7,13 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "MIJSONRequestManager.h"
 
 @interface AppDelegate : UIResponder <UIApplicationDelegate>
 
 @property (strong, nonatomic) UIWindow *window;
 
++(MIJSONRequestManager *)requestManager;
 
 @end
 
