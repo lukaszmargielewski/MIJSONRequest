@@ -47,6 +47,7 @@ NSString *kMIJSONRequestManagerHttpMethodPOST = @"POST";
 }
  */
 
+/*
 #pragma mark - Default Manager:
 
 NSString *_urlString;
@@ -85,7 +86,7 @@ MIJSONRequestManagerLoginSessionType _sessionType;
     
     
 }
-
+*/
 
 
 #pragma mark - Designated initializer:

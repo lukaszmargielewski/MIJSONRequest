@@ -55,6 +55,7 @@ typedef NS_ENUM(NSUInteger, MIJSONRequestManagerLoginSessionType){
 @property (nonatomic, strong) NSArray *sessionRequestKeys;
 @property (nonatomic) MIJSONRequestManagerLoginSessionType sessionType;
 
+/*
 #pragma mark - Default Manager:
 
 +(void)configureDefaultManagerWithUrlString:(NSString *)urlString
@@ -63,7 +64,7 @@ typedef NS_ENUM(NSUInteger, MIJSONRequestManagerLoginSessionType){
 
 
 +(instancetype)defaultManager;
-
+*/
 
 #pragma mark - Init:
 
