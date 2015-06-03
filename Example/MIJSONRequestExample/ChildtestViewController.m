@@ -63,20 +63,12 @@
 
     __block ChildtestViewController *blockSelf = self;
     
-    request = [[MIJSONRequestManager defaultManager] startRequestWithJSONDictionary:@{@"action" : @"validate", @"signup_code" : @"mf2100"} startBlock:^(MIJSONRequest *request, BOOL started){
-        
-        NSLog(@"started: %i", started);
-        
-    } progressBlock:^(MIJSONRequest *requet, float progress) {
-        
-        NSLog(@"progress: %f", progress);
-        
-    }completionBlock:^(MIJSONRequest *request, enum MIJSONRequestResult result, NSDictionary *respone, NSError *error){
+    request = [[MIJSONRequestManager defaultManager] startRequestWithJSONDictionary:@{@"action" : @"validate", @"signup_code" : @"mf2100"} completionBlock:^(MIJSONRequest *request, enum MIJSONRequestResult result, NSDictionary *respone, NSError *error){
         
         NSLog(@"finished: %lu, response: %@  Error: %@", (unsigned long)result, respone, error);
         [blockSelf testDummyCompeteMethod:respone];
         
-    } client:self];
+    }];
     
     if (pop) {
     

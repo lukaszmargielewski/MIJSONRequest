@@ -79,6 +79,9 @@ typedef NS_ENUM(NSUInteger, MIJSONRequestManagerLoginSessionType){
 #pragma mark - API:
 
 -(MIJSONRequest *)startRequestWithJSONDictionary:(NSDictionary *)reqestDictionary
+                                 completionBlock:(MIJSONRequestManagerRequestCompletionBlock)completionBlock;
+
+-(MIJSONRequest *)startRequestWithJSONDictionary:(NSDictionary *)reqestDictionary
                            startBlock:(MIJSONRequestManagerRequestStartBlock)startBlock
                         progressBlock:(MIJSONRequestManagerRequestProgressBlock)progressBlock
                       completionBlock:(MIJSONRequestManagerRequestCompletionBlock)completionBlock

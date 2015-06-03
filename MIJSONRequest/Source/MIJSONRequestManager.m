@@ -136,6 +136,12 @@ MIJSONRequestManagerLoginSessionType _sessionType;
 #pragma mark - Scheduling requests:
 
 -(MIJSONRequest *)startRequestWithJSONDictionary:(NSDictionary *)reqestDictionary
+                                 completionBlock:(MIJSONRequestManagerRequestCompletionBlock)completionBlock{
+
+    return [self startRequestWithJSONDictionary:reqestDictionary startBlock:nil progressBlock:nil completionBlock:completionBlock client:nil];
+    
+}
+-(MIJSONRequest *)startRequestWithJSONDictionary:(NSDictionary *)reqestDictionary
                            startBlock:(MIJSONRequestManagerRequestStartBlock)startBlock
                         progressBlock:(MIJSONRequestManagerRequestProgressBlock)progressBlock
                       completionBlock:(MIJSONRequestManagerRequestCompletionBlock)completionBlock
