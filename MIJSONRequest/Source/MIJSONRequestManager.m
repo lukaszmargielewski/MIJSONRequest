@@ -259,12 +259,13 @@ MIJSONRequestManagerLoginSessionType _sessionType;
     }
 
     
-    MIJSONRequestAuthenticate *jsonRequest = nil;
+    MIJSONRequest *jsonRequest = nil;
     
     if (self.authDelegate) {
     
-        jsonRequest = [MIJSONRequestAuthenticate requestWithUrl:self.webserviceUrl httpHeaders:finalHTTPHeaders httpMethod:httpMethod body:finalRequestBody delegate:self];
-            jsonRequest.authDelegate    = self.authDelegate;
+        MIJSONRequestAuthenticate *jA = [MIJSONRequestAuthenticate requestWithUrl:self.webserviceUrl httpHeaders:finalHTTPHeaders httpMethod:httpMethod body:finalRequestBody delegate:self];
+            jA.authDelegate    = self.authDelegate;
+        jsonRequest = jA;
         
     }else{
     
