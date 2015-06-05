@@ -54,8 +54,13 @@
 }
 -(void)storeSession:(NSDictionary *)sessionDictionary accountName:(NSString *)accountName{
 
+    if (!sessionDictionary) {
+        return;
+    }
     _sessionDictionary = sessionDictionary;
     _sessionRetrievalTried = NO;
+
+    
     
     if (accountName) {
     
