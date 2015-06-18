@@ -104,6 +104,10 @@ typedef NS_ENUM(NSUInteger, MIJSONRequestManagerLoginSessionType){
                       completionBlock:(MIJSONRequestManagerRequestCompletionBlock)completionBlock
                                client:(id)client;
 
+-(MIJSONRequest *)requestWithJSONDictionary:(NSDictionary *)reqestDictionary
+                                httpHeaders:(NSDictionary *)httpHeaders
+                                 httpMethod:(NSString *)httpMethod
+                                       name:(NSString *)name;
 
 
 -(void)cancelRequest:(MIJSONRequest *)request;

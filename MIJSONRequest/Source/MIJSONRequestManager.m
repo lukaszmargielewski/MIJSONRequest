@@ -187,17 +187,9 @@ MIJSONRequestManagerLoginSessionType _sessionType;
         return nil;
     }
     
-    // Generate name:
-    if (!name) {
-        
-        name = [self stringWithRequestDictionary:reqestDictionary];
-        if (httpHeaders && httpHeaders != self.httpHeadersDefault) {
-            NSString *nh = [self stringWithRequestDictionary:httpHeaders];
-            name = [NSString stringWithFormat:@"%@_%@", nh, name];
-        }
-    }
+    MIJSONRequest *jsonRequest = [self requestWithJSONDictionary:reqestDictionary httpHeaders:httpHeaders httpMethod:httpMethod name:name];
     
-    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"name = %@", name];
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"name = %@", jsonRequest.name];
     NSSet *similarScheduled = [_requestsInProgress filteredSetUsingPredicate:predicate];
     
     if (similarScheduled && similarScheduled.count) {
@@ -209,6 +201,52 @@ MIJSONRequestManagerLoginSessionType _sessionType;
             return nil;
         }
     }
+    
+    jsonRequest.startBlock      = startBlock;
+    jsonRequest.progressBlock   = progressBlock;
+    jsonRequest.completionBlock = completionBlock;
+        
+        if (!_requestsInProgress) {
+        
+            _requestsInProgress = [[NSMutableSet alloc] init];
+        }
+    
+    MIJSONRequestManagerRequestObject *ro = [MIJSONRequestManagerRequestObject requestObjectWithRequest:jsonRequest
+                                                                                                 client:client];
+    
+    iBefore = _requestsInProgress.count;
+    [_requestsInProgress addObject:ro];
+    
+    [jsonRequest start];
+    
+    if (iBefore == 0) {
+        //dispatch_async(dispatch_get_main_queue(), ^{
+        
+            [self resumed];
+        //});
+        
+    }
+    
+    return jsonRequest;
+}
+
+-(MIJSONRequest *)requestWithJSONDictionary:(NSDictionary *)reqestDictionary
+                                     httpHeaders:(NSDictionary *)httpHeaders
+                                      httpMethod:(NSString *)httpMethod
+                                            name:(NSString *)name{
+    
+    
+    // Generate name:
+    if (!name) {
+        
+        name = [self stringWithRequestDictionary:reqestDictionary];
+        if (httpHeaders && httpHeaders != self.httpHeadersDefault) {
+            NSString *nh = [self stringWithRequestDictionary:httpHeaders];
+            name = [NSString stringWithFormat:@"%@_%@", nh, name];
+        }
+    }
+    
+    if(!httpMethod)httpMethod = self.httpMethodDefault;
     
     NSMutableDictionary *finalRequestBody = [NSMutableDictionary dictionaryWithCapacity:10];
     NSMutableDictionary *finalHTTPHeaders = [NSMutableDictionary dictionaryWithCapacity:10];
@@ -239,7 +277,7 @@ MIJSONRequestManagerLoginSessionType _sessionType;
     // 2. Add default request parameters (if specified), f.x: login session, etc...
     if (self.requestParametersDefault && self.requestParametersDefault.allKeys.count) {
         
-            [finalRequestBody addEntriesFromDictionary:_requestParametersDefault];
+        [finalRequestBody addEntriesFromDictionary:_requestParametersDefault];
     }
     
     if (reqestDictionary && reqestDictionary.allKeys.count) {
@@ -257,48 +295,24 @@ MIJSONRequestManagerLoginSessionType _sessionType;
         
         [finalHTTPHeaders addEntriesFromDictionary:httpHeaders];
     }
-
+    
     
     MIJSONRequest *jsonRequest = nil;
     
     if (self.authDelegate) {
-    
+        
         MIJSONRequestAuthenticate *jA = [MIJSONRequestAuthenticate requestWithUrl:self.webserviceUrl httpHeaders:finalHTTPHeaders httpMethod:httpMethod body:finalRequestBody delegate:self];
-            jA.authDelegate    = self.authDelegate;
+        jA.authDelegate    = self.authDelegate;
         jsonRequest = jA;
         
     }else{
-    
+        
         jsonRequest = [MIJSONRequest requestWithUrl:self.webserviceUrl httpHeaders:finalHTTPHeaders httpMethod:httpMethod body:finalRequestBody delegate:self];
         
     }
     jsonRequest.showProgress    = YES;
     jsonRequest.name            = name;
-    jsonRequest.startBlock      = startBlock;
-    jsonRequest.progressBlock   = progressBlock;
-    jsonRequest.completionBlock = completionBlock;
-        
-        if (!_requestsInProgress) {
-        
-            _requestsInProgress = [[NSMutableSet alloc] init];
-        }
-    
-    MIJSONRequestManagerRequestObject *ro = [MIJSONRequestManagerRequestObject requestObjectWithRequest:jsonRequest
-                                                                                                 client:client];
-    
-    iBefore = _requestsInProgress.count;
-    [_requestsInProgress addObject:ro];
-    
-    [jsonRequest start];
-    
-    if (iBefore == 0) {
-        //dispatch_async(dispatch_get_main_queue(), ^{
-        
-            [self resumed];
-        //});
-        
-    }
-    
+
     return jsonRequest;
 }
 
