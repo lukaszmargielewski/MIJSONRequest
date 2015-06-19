@@ -321,7 +321,7 @@ MIJSONRequestManagerLoginSessionType _sessionType;
     NSMutableArray *arguments = [NSMutableArray arrayWithCapacity:[dictionary count]];
     
     [dictionary enumerateKeysAndObjectsUsingBlock:^(id key, id object, BOOL *stop) {
-        NSString *value = [object isKindOfClass:[NSString class]] ? object : [object stringValue];
+        NSString *value = [object respondsToSelector:@selector(stringValue)] ? [object stringValue] : object;
         
         [arguments addObject:[NSString stringWithFormat:@"%@=%@",
                               key,
