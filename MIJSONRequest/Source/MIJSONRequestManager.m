@@ -189,7 +189,7 @@ MIJSONRequestManagerLoginSessionType _sessionType;
     
     MIJSONRequest *jsonRequest = [self requestWithJSONDictionary:reqestDictionary httpHeaders:httpHeaders httpMethod:httpMethod name:name];
     
-    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"name = %@", jsonRequest.name];
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"request.name = %@", jsonRequest.name];
     NSSet *similarScheduled = [_requestsInProgress filteredSetUsingPredicate:predicate];
     
     if (similarScheduled && similarScheduled.count) {

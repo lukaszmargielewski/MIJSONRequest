@@ -13,6 +13,7 @@
 @synthesize progress = _progress;
 @synthesize downloadedBytes = _downloadedBytes;
 @synthesize responseRawData = _responseRawData;
+@synthesize result = _result;
 
 #pragma mark
 
@@ -187,11 +188,12 @@
     _responseRawData = nil;
     _jsonResponse = nil;
 	_downloading = NO;
+    _result = MIJSONRequestResultCancelled;
     
     if (_completionBlock) {
         __block MIJSONRequest *rrr = self;
-            
-        _completionBlock(rrr, MIJSONRequestResultCancelled, nil, nil);
+        
+        _completionBlock(rrr, nil, nil);
         _completionBlock = nil;
     }
     
@@ -298,13 +300,14 @@
     _responseRawData = nil;
     _connection = nil;
 	_downloading = NO;
+    _result = MIJSONRequestResultFailed;
     
     if (_completionBlock) {
         __block MIJSONRequest *rrr = self;
         
         dispatch_async(dispatch_get_main_queue(), ^{
         
-            _completionBlock(rrr, MIJSONRequestResultFailed, nil, error);
+            _completionBlock(rrr, nil, error);
             _completionBlock = nil;
         });
         
@@ -340,6 +343,7 @@
     downloadEndTime = [[NSDate date] timeIntervalSince1970];
     totalDownloadTime = downloadEndTime - downloadStartTime;
     _responseSize = [_responseRawData length];
+    _result = MIJSONRequestResultSuccess;
     
 	[UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
    // Tell delegate theat data has been downloaded:
@@ -360,7 +364,7 @@
             if (_completionBlock) {
                 
                 __block MIJSONRequest *rrr = self;
-                _completionBlock(rrr, MIJSONRequestResultSuccess, _jsonResponse, jsonError);
+                _completionBlock(rrr, _jsonResponse, jsonError);
                 _completionBlock = nil;
             }
             

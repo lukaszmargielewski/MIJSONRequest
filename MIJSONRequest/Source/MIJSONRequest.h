@@ -17,7 +17,7 @@ typedef NS_ENUM(NSInteger, MIJSONRequestResult){
 
 typedef void(^MIJSONRequestManagerRequestStartBlock)(MIJSONRequest *action, BOOL started);
 typedef void(^MIJSONRequestManagerRequestProgressBlock)(MIJSONRequest *action, float progress);
-typedef void(^MIJSONRequestManagerRequestCompletionBlock)(MIJSONRequest *action, enum MIJSONRequestResult result, NSDictionary *response, NSError *error);
+typedef void(^MIJSONRequestManagerRequestCompletionBlock)(MIJSONRequest *action, NSDictionary *response, NSError *error);
 
 @protocol MIJSONRequestDelegate;
 
@@ -54,6 +54,8 @@ typedef void(^MIJSONRequestManagerRequestCompletionBlock)(MIJSONRequest *action,
 @property (nonatomic, strong) MIJSONRequestManagerRequestStartBlock startBlock;
 @property (nonatomic, strong) MIJSONRequestManagerRequestProgressBlock progressBlock;
 @property (nonatomic, strong) MIJSONRequestManagerRequestCompletionBlock completionBlock;
+
+@property (nonatomic, readonly) MIJSONRequestResult result;
 
 +(instancetype)requestWithUrl:(NSURL *)url httpHeaders:(NSDictionary *)httpHeaders httpMethod:(NSString *)httpMethod body:(NSDictionary *)requestDictionary delegate:(id<MIJSONRequestDelegate>)delegate;
 
