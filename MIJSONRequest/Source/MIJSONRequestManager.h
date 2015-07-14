@@ -121,7 +121,7 @@ typedef NS_ENUM(NSUInteger, MIJSONRequestManagerLoginSessionType){
 @end
 
 @protocol MIJSONRequestManagerActivityObserver <NSObject>
-
+@optional
 -(void)MIJSONRequestManagerDidResumeRequests:(MIJSONRequestManager *)manager;
 -(void)MIJSONRequestManagerDidFinishAllRequests:(MIJSONRequestManager *)manager
                                 downloadedBytes:(unsigned long long)downloadedBytes;
@@ -133,7 +133,7 @@ typedef NS_ENUM(NSUInteger, MIJSONRequestManagerLoginSessionType){
               requestsCount:(NSUInteger)requestsCount;
 
 
-@optional
+
 -(void)MIJSONRequestManager:(MIJSONRequestManager *)manager connectionToHostChanged:(BOOL)connected;
 
 @end

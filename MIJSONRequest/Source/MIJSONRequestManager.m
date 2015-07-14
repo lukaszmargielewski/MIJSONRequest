@@ -513,7 +513,11 @@ DLog(@"MIJSONRequestManager -> App connection status changed to: %i  hostStatus:
     
     for (id<MIJSONRequestManagerActivityObserver>observer in _activityObservers) {
         
-        [observer MIJSONRequestManagerDidResumeRequests:self];
+        if ([observer respondsToSelector:@selector(MIJSONRequestManagerDidResumeRequests:)]) {
+        
+            [observer MIJSONRequestManagerDidResumeRequests:self];
+        }
+        
     }
     
 }
@@ -530,14 +534,22 @@ DLog(@"MIJSONRequestManager -> App connection status changed to: %i  hostStatus:
     
     for (id<MIJSONRequestManagerActivityObserver>observer in _activityObservers) {
         
-        [observer MIJSONRequestManager:self didUpdateTotalProgress:_totalProgress downloadedBytes:_totalDownloadedBytes totalBytesToDownload:_totalBytesToDownload requestsCount:_requestsInProgress.count];
+        if([observer respondsToSelector:@selector(MIJSONRequestManager:didUpdateTotalProgress:downloadedBytes:totalBytesToDownload:requestsCount:)]){
+        
+            [observer MIJSONRequestManager:self didUpdateTotalProgress:_totalProgress downloadedBytes:_totalDownloadedBytes totalBytesToDownload:_totalBytesToDownload requestsCount:_requestsInProgress.count];
+        }
+        
     }
 }
 -(void)finishedAll{
     
     for (id<MIJSONRequestManagerActivityObserver>observer in _activityObservers) {
         
-        [observer MIJSONRequestManagerDidFinishAllRequests:self downloadedBytes:_totalBytesToDownload];
+        if ([observer respondsToSelector:@selector(MIJSONRequestManagerDidFinishAllRequests:downloadedBytes:)]) {
+        
+            [observer MIJSONRequestManagerDidFinishAllRequests:self downloadedBytes:_totalBytesToDownload];
+        }
+        
     }
 }
 
