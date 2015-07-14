@@ -60,6 +60,9 @@
 	
     if (parameters && [parameters allKeys].count) {
     
+        if (!_requestDictionary) {
+            _requestDictionary = [[NSMutableArray alloc] init];
+        }
         [self.requestDictionary addEntriesFromDictionary:parameters];
     }
 	

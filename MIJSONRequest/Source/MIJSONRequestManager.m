@@ -38,57 +38,6 @@ NSString *kMIJSONRequestManagerHttpMethodPOST = @"POST";
 	
 }
 
-/*
--(id)init{
-	
-    NSAssert(NO, @"Direct init not allowed, use initWithUrlString:hostName: instead...");
-    self = [super init];
-    return nil;
-}
- */
-
-/*
-#pragma mark - Default Manager:
-
-NSString *_urlString;
-NSString *_hostName;
-NSString *_loginSessionName;
-NSArray *_sessionRequestKeys;
-
-MIJSONRequestManagerLoginSessionType _sessionType;
-
-+(void)configureDefaultManagerWithUrlString:(NSString *)urlString
-                                   hostName:(NSString *)hostName
-                           loginSessionName:(NSString *)loginSessionName{
-    
-    NSAssert1(_urlString == nil, @"MIHWebservices can be configred once only. _urlStrin already present = %@", _urlString);
-    
-    _urlString = urlString;
-    _hostName = hostName;
-    _loginSessionName = loginSessionName;
-
-}
-
-+(instancetype)defaultManager{
-    
-    static dispatch_once_t pred;
-    static MIJSONRequestManager *shared = nil;
-    
-    dispatch_once(&pred, ^{
-
-        NSAssert1(_urlString != nil, @"MIHWebservices must be configured, before calling its request manager! call configureWithUrlString.... first", _urlString);
-        
-        shared = [MIJSONRequestManager requestManagerWithUrlString:_urlString hostName:_hostName loginSessionName:_loginSessionName];
-        
-        
-    });
-    return shared;
-    
-    
-}
-*/
-
-
 #pragma mark - Designated initializer:
 
 +(instancetype)requestManagerWithUrlString:(NSString *)urlString
@@ -184,7 +133,7 @@ MIJSONRequestManagerLoginSessionType _sessionType;
                                client:(id)client{
     
     if (!self.connected) {
-        return nil;
+       // return nil;
     }
     
     MIJSONRequest *jsonRequest = [self requestWithJSONDictionary:reqestDictionary httpHeaders:httpHeaders httpMethod:httpMethod name:name];
@@ -201,7 +150,6 @@ MIJSONRequestManagerLoginSessionType _sessionType;
             return nil;
         }
     }
-    
     jsonRequest.startBlock      = startBlock;
     jsonRequest.progressBlock   = progressBlock;
     jsonRequest.completionBlock = completionBlock;
@@ -296,18 +244,30 @@ MIJSONRequestManagerLoginSessionType _sessionType;
         [finalHTTPHeaders addEntriesFromDictionary:httpHeaders];
     }
     
+    NSURL *url = self.webserviceUrl;
+    
+    if ([httpMethod isEqualToString:kMIJSONRequestManagerHttpMethodGET]) {
+        
+        finalRequestBody = nil;
+        
+        NSString *suffix = [self.urlEncoder encodeRequestDictionary:reqestDictionary];
+        if (suffix) {
+            url = [NSURL URLWithString:[[url absoluteString] stringByAppendingString:suffix]];
+        }
+    }
+
     
     MIJSONRequest *jsonRequest = nil;
     
-    if (self.authDelegate) {
+    if ([[self.webserviceUrl absoluteString] hasPrefix:@"https:"] &&  self.authDelegate) {
         
-        MIJSONRequestAuthenticate *jA = [MIJSONRequestAuthenticate requestWithUrl:self.webserviceUrl httpHeaders:finalHTTPHeaders httpMethod:httpMethod body:finalRequestBody delegate:self];
+        MIJSONRequestAuthenticate *jA = [MIJSONRequestAuthenticate requestWithUrl:url httpHeaders:finalHTTPHeaders httpMethod:httpMethod body:finalRequestBody delegate:self];
         jA.authDelegate    = self.authDelegate;
         jsonRequest = jA;
         
     }else{
         
-        jsonRequest = [MIJSONRequest requestWithUrl:self.webserviceUrl httpHeaders:finalHTTPHeaders httpMethod:httpMethod body:finalRequestBody delegate:self];
+        jsonRequest = [MIJSONRequest requestWithUrl:url httpHeaders:finalHTTPHeaders httpMethod:httpMethod body:finalRequestBody delegate:self];
         
     }
     jsonRequest.showProgress    = YES;

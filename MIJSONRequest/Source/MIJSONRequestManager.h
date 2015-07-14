@@ -15,6 +15,11 @@ extern NSString *kMIJSONRequestManagerConnectionToHostChangedNotification;
 extern NSString *kMIJSONRequestManagerHttpMethodGET;
 extern NSString *kMIJSONRequestManagerHttpMethodPOST;
 
+@protocol MIJSONRequestManagerURLEncoder <NSObject>
+
+-(NSString *)encodeRequestDictionary:(NSDictionary *)requestDictionary;
+
+@end
 
 typedef NS_ENUM(NSUInteger, MIJSONRequestManagerLoginSessionType){
 
@@ -50,21 +55,11 @@ typedef NS_ENUM(NSUInteger, MIJSONRequestManagerLoginSessionType){
 @property (nonatomic, readonly) BOOL connected, connected_before;
 @property (nonatomic, readonly) NetworkStatus hostStatus;
 @property (nonatomic, assign) id<MIJSONRequestAuthenticationDelegate>authDelegate;
+@property (nonatomic, assign) id<MIJSONRequestManagerURLEncoder>urlEncoder;
 
 @property (nonatomic, strong, readonly) MIJSONRequestSecureSession *loginSession;
 @property (nonatomic, strong) NSArray *sessionRequestKeys;
 @property (nonatomic) MIJSONRequestManagerLoginSessionType sessionType;
-
-/*
-#pragma mark - Default Manager:
-
-+(void)configureDefaultManagerWithUrlString:(NSString *)urlString
-                                   hostName:(NSString *)hostName
-                           loginSessionName:(NSString *)loginSessionName;
-
-
-+(instancetype)defaultManager;
-*/
 
 #pragma mark - Init:
 
