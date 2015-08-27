@@ -31,7 +31,11 @@
         
         NSDictionary *infoDictionary = [[NSBundle mainBundle] infoDictionary];
         NSString *bundleIdentifier = [infoDictionary[@"CFBundleIdentifier"] stringByAppendingString:_identifier];
-        _keychainSession = [[KeychainItemWrapper alloc] initWithIdentifier:bundleIdentifier accessGroup:nil];
+        NSString *keychainID = [NSString stringWithFormat:@"%@.login.session", bundleIdentifier];
+        
+        _keychainSession = [[KeychainItemWrapper alloc] initWithIdentifier:keychainID accessGroup:nil];
+        [_keychainSession setObject:keychainID forKey:(__bridge id)kSecAttrService];
+        
     }
     
     return _keychainSession;
