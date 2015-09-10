@@ -168,7 +168,7 @@
 		_jsonResponse = [NSJSONSerialization JSONObjectWithData:_responseRawData options:0 error:&jsonError];
         
         if (jsonError) {
-            //DLog(@"ActionRequest: %@ JSON Error in sync request: %@", self.actionName, jsonError);
+            //DMIJSONRLog(@"ActionRequest: %@ JSON Error in sync request: %@", self.actionName, jsonError);
         }
         
         _downloading = NO;
@@ -184,7 +184,7 @@
     [_cancelTimer invalidate];
     _cancelTimer = nil;
     
-    //DLog(@"Cancelling connection for action:%@", self.actionName);
+    //DMIJSONRLog(@"Cancelling connection for action:%@", self.actionName);
     [_connection cancel];
     
     _connection = nil;
@@ -216,7 +216,7 @@
     _expectedResponseSize = [response expectedContentLength];
     if (_expectedResponseSize <= 0) {
     
-//DLog(@"%@ -> Tryng to get response expected lenght from headers: %@", self.actionName, fields);
+//DMIJSONRLog(@"%@ -> Tryng to get response expected lenght from headers: %@", self.actionName, fields);
         _expectedResponseSize = [[fields valueForKey:@"Content-Length-Unzipped"] longLongValue];
     }
     
@@ -226,7 +226,7 @@
     _responseZipped  = (senc && [senc isEqualToString:@"gzip"]);
 
     //if ([self.actionName isEqualToString:@"bulk"])
-        //DLog(@"%@ Connection didReceiveResponse with gzip: %i expected size: %lli", self.actionName, isResponseGzipped, expectedResponseSize);
+        //DMIJSONRLog(@"%@ Connection didReceiveResponse with gzip: %i expected size: %lli", self.actionName, isResponseGzipped, expectedResponseSize);
     
     _downloadedBytes = 0;
     
@@ -323,18 +323,18 @@
 }
 - (void)logTimes{
 
-   //DLog(@"=== Action %@ timing logs: === start =", self.actionName);
-   //DLog(@"Request: %@", self.requestDictionary);
-   //DLog(@"Response size: %lli (in bytes)", responseSize);
-   //DLog(@"Total time:                 %.4fsec", totalTime);
-   //DLog(@"Request generation time:    %.4fsec (local cost of generating JSON string)", totalRequestgenerationTime);
-   //DLog(@"Response time:              %.4fsec (server lag: time between sent request and 1st server response - data will start downlaoding)", totalResponseTime);
-   //DLog(@"Download time (pure):       %.4fsec (measured from 1st response time to the moment when last bytes arrive)", totalDownloadTime);
-   //DLog(@"Response parse:             %.4fsec (JSON respone parsing)", totalResponseParseTime);
-   //DLog(@"Summary | download speed:   %.3f bytes per second (only transfer itself)", ((float)responseSize / totalDownloadTime));
-   //DLog(@"Summary | total speed:      %.3f bytes per second (includes all: 1. download,  2. server response lag, 3. costs of local JSON processing - requset and response)", ((float)responseSize / totalTime));
+   //DMIJSONRLog(@"=== Action %@ timing logs: === start =", self.actionName);
+   //DMIJSONRLog(@"Request: %@", self.requestDictionary);
+   //DMIJSONRLog(@"Response size: %lli (in bytes)", responseSize);
+   //DMIJSONRLog(@"Total time:                 %.4fsec", totalTime);
+   //DMIJSONRLog(@"Request generation time:    %.4fsec (local cost of generating JSON string)", totalRequestgenerationTime);
+   //DMIJSONRLog(@"Response time:              %.4fsec (server lag: time between sent request and 1st server response - data will start downlaoding)", totalResponseTime);
+   //DMIJSONRLog(@"Download time (pure):       %.4fsec (measured from 1st response time to the moment when last bytes arrive)", totalDownloadTime);
+   //DMIJSONRLog(@"Response parse:             %.4fsec (JSON respone parsing)", totalResponseParseTime);
+   //DMIJSONRLog(@"Summary | download speed:   %.3f bytes per second (only transfer itself)", ((float)responseSize / totalDownloadTime));
+   //DMIJSONRLog(@"Summary | total speed:      %.3f bytes per second (includes all: 1. download,  2. server response lag, 3. costs of local JSON processing - requset and response)", ((float)responseSize / totalTime));
     
-   //DLog(@"=== Action %@ timing logs: ===  end  =", self.actionName);
+   //DMIJSONRLog(@"=== Action %@ timing logs: ===  end  =", self.actionName);
 }
 - (void)connectionDidFinishLoading:(NSURLConnection *)connection{
     

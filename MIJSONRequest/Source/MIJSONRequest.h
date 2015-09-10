@@ -1,9 +1,9 @@
 #import <UIKit/UIKit.h>
 
 #ifdef DEBUG
-#define DLog NSLog
+#define DMIJSONRLog NSLog
 #else
-#define DLog while(0){}
+#define DMIJSONRLog while(0){}
 #endif
 
 typedef NS_ENUM(NSInteger, MIJSONRequestResult){
