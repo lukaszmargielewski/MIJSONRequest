@@ -55,10 +55,10 @@
     
     if (!areCertificatesEqual)
     {
-        DLog(@"Bad Certificate sha: %@, canceling request.", serverCertificateDataHash);
+        DMIJSONRLog(@"Bad Certificate sha: %@, canceling request.", serverCertificateDataHash);
         //[connection cancel];
     }else{
-        DLog(@"Good Certificate sha: %@, allowing request....", serverCertificateDataHash);
+        DMIJSONRLog(@"Good Certificate sha: %@, allowing request....", serverCertificateDataHash);
     }
     // If the certificates are not equal we should not talk to the server;
     return areCertificatesEqual;

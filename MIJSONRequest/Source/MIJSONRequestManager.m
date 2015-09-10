@@ -422,7 +422,7 @@ NSString *kMIJSONRequestManagerHttpMethodPOST = @"POST";
         connected           = (hostStatus == NotReachable) ? NO : YES;
         connected_before    = (hs_before == NotReachable) ? NO : YES;
     
-DLog(@"MIJSONRequestManager connection status changed from: %i to: %i\n\n", connected_before, connected);
+DMIJSONRLog(@"MIJSONRequestManager connection status changed from: %i to: %i\n\n", connected_before, connected);
     
     if (connected_before != connected || !status_known) {
         
@@ -432,7 +432,7 @@ DLog(@"MIJSONRequestManager connection status changed from: %i to: %i\n\n", conn
                             @"before": @(connected_before), 
                             @"hostStatus": [NSNumber numberWithInt:hostStatus], 
                             @"hostStatusBefore": [NSNumber numberWithInt:hs_before]};
-DLog(@"MIJSONRequestManager -> App connection status changed to: %i  hostStatus: %li", connected, (long)hostStatus);
+DMIJSONRLog(@"MIJSONRequestManager -> App connection status changed to: %i  hostStatus: %li", connected, (long)hostStatus);
         [[NSNotificationCenter defaultCenter] postNotificationName:kMIJSONRequestManagerConnectionToHostChangedNotification object:ui userInfo:ui];
         
         for (id<MIJSONRequestManagerActivityObserver>observer in _activityObservers) {
