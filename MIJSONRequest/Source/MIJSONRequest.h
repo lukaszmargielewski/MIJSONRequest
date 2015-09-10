@@ -1,6 +1,10 @@
 #import <UIKit/UIKit.h>
 
 #ifdef DEBUG
+//#define MIJSONRequest 1
+#endif
+
+#ifdef DEBUG_MIJSONRequest
 #define DMIJSONRLog NSLog
 #else
 #define DMIJSONRLog while(0){}
