@@ -138,6 +138,7 @@ NSString *kMIJSONRequestManagerHttpMethodPOST = @"POST";
     
     MIJSONRequest *jsonRequest = [self requestWithJSONDictionary:reqestDictionary httpHeaders:httpHeaders httpMethod:httpMethod name:name];
     
+    /*
     NSPredicate *predicate = [NSPredicate predicateWithFormat:@"request.name = %@", jsonRequest.name];
     NSSet *similarScheduled = [_requestsInProgress filteredSetUsingPredicate:predicate];
     
@@ -150,6 +151,8 @@ NSString *kMIJSONRequestManagerHttpMethodPOST = @"POST";
             return nil;
         }
     }
+    
+    */
     jsonRequest.startBlock      = startBlock;
     jsonRequest.progressBlock   = progressBlock;
     jsonRequest.completionBlock = completionBlock;
