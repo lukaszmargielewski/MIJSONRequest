@@ -141,7 +141,7 @@ NSString *kMIJSONRequestManagerHttpMethodPOST = @"POST";
     NSPredicate *predicate = [NSPredicate predicateWithFormat:@"request.name = %@", jsonRequest.name];
     NSSet *similarScheduled = [_requestsInProgress filteredSetUsingPredicate:predicate];
     
-    if (similarScheduled && similarScheduled.count) {
+    if (similarScheduled && similarScheduled.count && jsonRequest.name) {
     
         MIJSONRequestManagerRequestObject *ro = [similarScheduled anyObject];
         if (ro) {
