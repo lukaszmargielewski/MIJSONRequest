@@ -1,0 +1,30 @@
+{
+  "DVTSourceControlWorkspaceBlueprintPrimaryRemoteRepositoryKey" : "C4647815C6AB7208667EF8A826822E1C140252E6",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyRepositoryLocationsKey" : {
+
+  },
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyStatesKey" : {
+    "C4647815C6AB7208667EF8A826822E1C140252E6" : 0,
+    "97052BD13268D207BDD18552CF39B5948C0B93B8" : 0
+  },
+  "DVTSourceControlWorkspaceBlueprintIdentifierKey" : "53CA1559-FEE4-48CA-B916-722756273AB8",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyPathsKey" : {
+    "C4647815C6AB7208667EF8A826822E1C140252E6" : "MIJSONRequest",
+    "97052BD13268D207BDD18552CF39B5948C0B93B8" : ""
+  },
+  "DVTSourceControlWorkspaceBlueprintNameKey" : "MIJSONRequestExample",
+  "DVTSourceControlWorkspaceBlueprintVersion" : 204,
+  "DVTSourceControlWorkspaceBlueprintRelativePathToProjectKey" : "Example\/MIJSONRequestExample.xcodeproj",
+  "DVTSourceControlWorkspaceBlueprintRemoteRepositoriesKey" : [
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/bitbucket.org\/mobile-identity\/ios-hillerod.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "97052BD13268D207BDD18552CF39B5948C0B93B8"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/lukaszmargielewski\/MIJSONRequest.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "C4647815C6AB7208667EF8A826822E1C140252E6"
+    }
+  ]
+}

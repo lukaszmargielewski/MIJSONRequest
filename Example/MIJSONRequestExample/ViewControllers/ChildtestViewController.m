@@ -8,7 +8,7 @@
 
 #import "ChildtestViewController.h"
 #import "MIJSONRequestManager.h"
-#import "AppDelegate.h"
+#import "MIJSONApi.h"
 
 @interface ChildtestViewController ()
 
@@ -21,13 +21,13 @@
 
 - (void)dealloc{
 
-    [[AppDelegate requestManager] cancelRequest:request];
+    [[MIJSONApi requestManager]  cancelRequest:request];
 }
 ///*
 -(void)viewWillDisappear:(BOOL)animated{
 
-    [[AppDelegate requestManager] cancelAllRequestsForClient:self];
-    [[AppDelegate requestManager] cancelRequest:request];
+    [[MIJSONApi requestManager] cancelAllRequestsForClient:self];
+    [[MIJSONApi requestManager] cancelRequest:request];
 }
 // */
 - (void)viewDidLoad {
@@ -65,10 +65,14 @@
 
     __block ChildtestViewController *blockSelf = self;
     
-    request = [[AppDelegate requestManager] startRequestWithJSONDictionary:@{@"action" : @"validate", @"signup_code" : @"mf2100"} completionBlock:^(MIJSONRequest *request, enum MIJSONRequestResult result, NSDictionary *respone, NSError *error){
+    request = [[MIJSONApi requestManager] startRequestWithJSONDictionary:
+                @{
+                  @"action" : @"validate",
+                  @"signup_code" : @"mf2100"
+                  } completionBlock:^(MIJSONRequest *action, NSDictionary *response, NSError *error){
         
-        NSLog(@"finished: %lu, response: %@  Error: %@", (unsigned long)result, respone, error);
-        [blockSelf testDummyCompeteMethod:respone];
+        NSLog(@"finished: with response: %@  Error: %@", response, error);
+        [blockSelf testDummyCompeteMethod:response];
         
     }];
     

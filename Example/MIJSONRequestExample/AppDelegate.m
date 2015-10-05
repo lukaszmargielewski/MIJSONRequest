@@ -7,38 +7,16 @@
 //
 
 #import "AppDelegate.h"
-#import "MIJSONRequestAuthenticationPinCertificateSHA256.h"
-#import "MIJSONRequestManager.h"
-
-#define EXPECTED_CERTIFICATE_BASE64_SHA256 @"a09eab79b96bde078eebc8dc5875bddbf8744e80b678412fb44517dae6d1d3ec"
-#define WEBSERVICE_URL @"https://webservice.mobile-identity.com/plugins/mflife/json"
-#define HOST_NAME @"http://www.mobile-identity.com"
-#define SECURE_SESSION_NAME @"default_session"
 
 @interface AppDelegate ()
-@property (nonatomic, strong) MIJSONRequestAuthenticationPinCertificateSHA256 *exampleAuthenticate;
-@property (nonatomic, strong) MIJSONRequestManager *requestManager;
+
 @end
 
 @implementation AppDelegate
 
-+ (MIJSONRequestManager *)requestManager{
-
-    AppDelegate *appDel = (AppDelegate *)[[UIApplication sharedApplication] delegate];
-    return appDel.requestManager;
-}
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
-    
-    self.requestManager = [MIJSONRequestManager requestManagerWithUrlString:WEBSERVICE_URL
-                                                                   hostName:HOST_NAME
-                                                           loginSessionName:SECURE_SESSION_NAME];
-    
-    self.requestManager.httpMethodDefault   = kMIJSONRequestManagerHttpMethodPOST;
-    self.exampleAuthenticate                = [[MIJSONRequestAuthenticationPinCertificateSHA256 alloc] init];
-    self.exampleAuthenticate.certificateSha = EXPECTED_CERTIFICATE_BASE64_SHA256;
-    self.requestManager.authDelegate        = self.exampleAuthenticate;
     
     return YES;
 }
