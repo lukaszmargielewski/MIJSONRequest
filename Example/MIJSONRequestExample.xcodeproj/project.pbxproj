@@ -73,6 +73,7 @@
 		A1A92DF91B1E27B200F59597 /* NSData+Base64.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSData+Base64.m"; sourceTree = "<group>"; };
 		A1A92DFE1B1E31AE00F59597 /* MIJSONRequestAuthenticate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MIJSONRequestAuthenticate.h; sourceTree = "<group>"; };
 		A1A92DFF1B1E31AE00F59597 /* MIJSONRequestAuthenticate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MIJSONRequestAuthenticate.m; sourceTree = "<group>"; };
+		A1CCCAB51BC47FE0002EC6A6 /* MIJSONRequest.podspec */ = {isa = PBXFileReference; lastKnownFileType = text; name = MIJSONRequest.podspec; path = ../MIJSONRequest.podspec; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -118,6 +119,7 @@
 		A173862D1B18A04D00750B53 = {
 			isa = PBXGroup;
 			children = (
+				A1CCCAB51BC47FE0002EC6A6 /* MIJSONRequest.podspec */,
 				A173865F1B18A15300750B53 /* MIJSONRequest */,
 				A17386381B18A04D00750B53 /* MIJSONRequestExample */,
 				A17386521B18A04D00750B53 /* MIJSONRequestExampleTests */,
