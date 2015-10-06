@@ -1,5 +1,5 @@
 #
-# Be sure to run `pod lib lint NSObjectSwizzle.podspec' to ensure this is a
+# Be sure to run `pod lib lint MIJSONRequest.podspec' to ensure this is a
 # valid spec before submitting.
 #
 # Any lines starting with a # are optional, but their use is encouraged
@@ -7,7 +7,7 @@
 #
 
 Pod::Spec.new do |s|
-  s.name             = "NSObjectSwizzle"
+  s.name             = "MIJSONRequest"
   s.version          = "0.5.0"
   s.summary          = "MIJSONRequest JSON requests"
   s.description      = "Simple JSON conectivity framework"
